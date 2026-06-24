@@ -1,0 +1,416 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Musik Studio Lite</title><link rel="stylesheet" href="style.css"></head><body><div class="app">
+<header><h1>MUSIK STUDIO LITE</h1></header>
+<div class="grid">
+<div class="tile" onclick="openPanel('drumPanel')"><div class="icon">🥁</div><div class="label">Drum</div></div>
+<div class="tile" onclick="openPanel('pianoPanel')"><div class="icon">🎹</div><div class="label">Piano</div></div>
+<div class="tile" onclick="openPanel('guitarPanel')"><div class="icon">🎸</div><div class="label">Guitar</div></div>
+<div class="tile" onclick="openPanel('bassPanel')"><div class="icon">🎸</div><div class="label">Bass</div></div>
+<div class="tile" onclick="openPanel('vocalPanel')"><div class="icon">🎤</div><div class="label">Vokal</div></div>
+<div class="tile" onclick="openPanel('fxPanel')"><div class="icon">✨</div><div class="label">FX</div></div>
+<div class="tile" onclick="openPanel('midiPanel')"><div class="icon">🎼</div><div class="label">MIDI</div></div>
+<div class="tile" onclick="openPanel('timelinePanel')"><div class="icon">🎼</div><div class="label">Editor Musik</div></div>
+<div class="tile" onclick="openPanel('importPanel')"><div class="icon">📥</div><div class="label">Import</div></div>
+<div class="tile" onclick="openPanel('exportPanel','projectPanel')"><div class="icon">📤</div><div class="label">Export</div></div>
+<div class="tile" onclick="openPanel('projectPanel')"><div class="icon">📁</div><div class="label">Project</div></div>
+
+</div>
+<div id="panelBackdrop" class="panel-backdrop" onclick="closeAllPanels()"></div>
+<section class="panel import-panel" id="importPanel">
+  <div class="panel-head">
+    <div>
+      <h2>📥 Import Audio</h2>
+      <p>Import MP3/WAV ke Editor Musik</p>
+    </div>
+    <button class="close-btn" onclick="closePanel('importPanel')">×</button>
+  </div>
+
+  <div class="import-actions">
+    <button onclick="openImportPicker()">📂 Import MP3/WAV</button>
+    <input type="file" id="importInput" accept="audio/*,.mp3,.wav" hidden>
+  </div>
+
+  <div class="import-info-box">
+    <b>Alur Import:</b>
+    <span>Pilih file → isi nama track → waveform muncul di Editor Musik</span>
+  </div>
+
+  <div class="record-head import-head-inside">
+    <div>
+      <h2>📦 List Import</h2>
+      <p>File audio yang sudah masuk</p>
+    </div>
+  </div>
+
+  <div class="import-list" id="importList">
+    <span class="empty-record">Belum ada file import</span>
+  </div>
+</section>
+
+<section class="panel" id="drumPanel">
+  <div class="panel-head"><div><h2>🥁 Drum Pad</h2><p>16 pad WAV asset asli + fallback sintetis jika file belum ada</p></div><button class="close-btn" onclick="closePanel('drumPanel')">×</button></div>
+  <div class="pad-grid piano-grid">
+    <button class="pad piano-pad" onclick="playDrum('kick')">Kick</button><button class="pad piano-pad" onclick="playDrum('snare')">Snare</button><button class="pad piano-pad" onclick="playDrum('hihat_closed')">Hi-Hat</button><button class="pad piano-pad" onclick="playDrum('clap')">Clap</button>
+    <button class="pad piano-pad" onclick="playDrum('tom_high')">Tom High</button><button class="pad piano-pad" onclick="playDrum('tom_mid')">Tom Mid</button><button class="pad piano-pad" onclick="playDrum('tom_low')">Tom Low</button><button class="pad piano-pad" onclick="playDrum('crash')">Crash</button>
+    <button class="pad piano-pad" onclick="playDrum('ride')">Ride</button><button class="pad piano-pad" onclick="playDrum('cymbal')">Cymbal</button><button class="pad piano-pad" onclick="playDrum('shaker')">Shaker</button><button class="pad piano-pad" onclick="playDrum('tambourine')">Tambourine</button>
+    <button class="pad piano-pad" onclick="playDrum('cowbell')">Cowbell</button><button class="pad piano-pad" onclick="playDrum('perc')">Perc</button><button class="pad piano-pad" onclick="playDrum('bloom_perc')">Bloom Perc</button><button class="pad piano-pad" onclick="playDrum('fx_hit')">FX Hit</button>
+  </div>
+</section>
+
+<section class="panel" id="pianoPanel"><div class="panel-head"><div><h2>🎹 Piano Pad</h2><p>16 pad nada sintetis</p></div><button class="close-btn" onclick="closePanel('pianoPanel')">×</button></div><div class="pad-grid piano-grid">
+<button class="pad piano-pad" onclick="playPiano('C4')">C4</button><button class="pad piano-pad" onclick="playPiano('D4')">D4</button><button class="pad piano-pad" onclick="playPiano('E4')">E4</button><button class="pad piano-pad" onclick="playPiano('F4')">F4</button><button class="pad piano-pad" onclick="playPiano('G4')">G4</button><button class="pad piano-pad" onclick="playPiano('A4')">A4</button><button class="pad piano-pad" onclick="playPiano('B4')">B4</button><button class="pad piano-pad" onclick="playPiano('C5')">C5</button><button class="pad piano-pad" onclick="playPiano('D5')">D5</button><button class="pad piano-pad" onclick="playPiano('E5')">E5</button><button class="pad piano-pad" onclick="playPiano('F5')">F5</button><button class="pad piano-pad" onclick="playPiano('G5')">G5</button><button class="pad piano-pad" onclick="playPiano('A5')">A5</button><button class="pad piano-pad" onclick="playPiano('B5')">B5</button><button class="pad piano-pad" onclick="playPiano('C6')">C6</button><button class="pad piano-pad" onclick="playPiano('D6')">D6</button></div></section>
+
+<section class="panel" id="guitarPanel"><div class="panel-head"><div><h2>🎸 Guitar Pad</h2><p>16 pad nada gitar sintetis</p></div><button class="close-btn" onclick="closePanel('guitarPanel')">×</button></div><div class="pad-grid piano-grid">
+<button class="pad piano-pad" onclick="playGuitar('C4')">C4</button><button class="pad piano-pad" onclick="playGuitar('D4')">D4</button><button class="pad piano-pad" onclick="playGuitar('E4')">E4</button><button class="pad piano-pad" onclick="playGuitar('F4')">F4</button><button class="pad piano-pad" onclick="playGuitar('G4')">G4</button><button class="pad piano-pad" onclick="playGuitar('A4')">A4</button><button class="pad piano-pad" onclick="playGuitar('B4')">B4</button><button class="pad piano-pad" onclick="playGuitar('C5')">C5</button><button class="pad piano-pad" onclick="playGuitar('D5')">D5</button><button class="pad piano-pad" onclick="playGuitar('E5')">E5</button><button class="pad piano-pad" onclick="playGuitar('F5')">F5</button><button class="pad piano-pad" onclick="playGuitar('G5')">G5</button><button class="pad piano-pad" onclick="playGuitar('A5')">A5</button><button class="pad piano-pad" onclick="playGuitar('B5')">B5</button><button class="pad piano-pad" onclick="playGuitar('C6')">C6</button><button class="pad piano-pad" onclick="playGuitar('D6')">D6</button></div></section>
+
+<section class="panel" id="bassPanel"><div class="panel-head"><div><h2>🎸 Bass Pad</h2><p>16 pad nada bass sintetis</p></div><button class="close-btn" onclick="closePanel('bassPanel')">×</button></div><div class="pad-grid piano-grid">
+<button class="pad piano-pad" onclick="playBass('C2')">C2</button><button class="pad piano-pad" onclick="playBass('D2')">D2</button><button class="pad piano-pad" onclick="playBass('E2')">E2</button><button class="pad piano-pad" onclick="playBass('F2')">F2</button><button class="pad piano-pad" onclick="playBass('G2')">G2</button><button class="pad piano-pad" onclick="playBass('A2')">A2</button><button class="pad piano-pad" onclick="playBass('B2')">B2</button><button class="pad piano-pad" onclick="playBass('C3')">C3</button><button class="pad piano-pad" onclick="playBass('D3')">D3</button><button class="pad piano-pad" onclick="playBass('E3')">E3</button><button class="pad piano-pad" onclick="playBass('F3')">F3</button><button class="pad piano-pad" onclick="playBass('G3')">G3</button><button class="pad piano-pad" onclick="playBass('A3')">A3</button><button class="pad piano-pad" onclick="playBass('B3')">B3</button><button class="pad piano-pad" onclick="playBass('C4')">C4</button><button class="pad piano-pad" onclick="playBass('D4')">D4</button></div></section>
+
+<section class="panel timeline-panel" id="timelinePanel"><div class="panel-head"><div><h2>🎼 Editor Musik V2</h2><p>Jantung Musik Studio Lite: track, clip, pattern, dan persiapan export</p></div><div class="panel-actions"><button class="scroll-btn" onclick="scrollTimelineTop()">⬆</button><button class="close-btn" onclick="closePanel('timelinePanel')">×</button></div></div>
+<div class="timeline-controls">
+<button onclick="stopTimeline()">⏹ Stop</button>
+<button onclick="playTimeline()">▶ Play</button>
+<button id="recBtn" onclick="toggleMasterRecorder()">🔴 Rec</button>
+<button onclick="changeBpm(-5)">−</button>
+<strong id="bpmText">120 BPM</strong>
+<button onclick="changeBpm(5)">+</button>
+</div>
+<div class="page-nav"><button onclick="prevStepPage()">◀</button><strong id="pageText" title="Halaman Editor Musik">1/4</strong><button onclick="nextStepPage()">▶</button></div>
+<div class="note-editor-controls"><button onclick="deleteSelectedNote()">🗑 Note</button><button onclick="copySelectedNote()">📋 Note</button><button onclick="pasteSelectedNote()">📌 Note</button><button onclick="clearSelectedNote()">Batal Pilih</button></div>
+<div class="timeline-controls">
+<button onclick="cutSelectedAudio()">✂ Cut Audio</button>
+<button onclick="copySelectedAudio()">📋 Copy Audio</button>
+<button onclick="pasteAudio()">📌 Paste Audio</button>
+<button onclick="saveProject()">💾 Save</button>
+<button onclick="loadProjectClick()">📂 Load</button>
+<button onclick="clearTimeline()">🗑 Clear</button>
+</div>
+<div class="editor-tools-toggle-v45">
+  <button id="editorToolsToggleBtnV45" onclick="toggleEditorToolsV45()">🎚 Tools Editor</button>
+  <span id="editorToolsStatusV45">Pilih clip untuk edit cepat</span>
+</div>
+<div class="editor-tools-panel-v45" id="editorToolsPanelV45">
+  <div class="editor-tools-head-v45">
+    <b>🎚 Editor Tools</b>
+    <button onclick="toggleEditorToolsV45(false)">^</button>
+  </div>
+  <div class="editor-tools-grid-v45">
+    <button onclick="trimStartClip()">✂ Trim Start</button>
+    <button onclick="trimEndClip()">✂ Trim End</button>
+    <button onclick="splitClipAtPlayhead()">✂ Split</button>
+    <button onclick="copySelectedClip()">📋 Copy</button>
+    <button onclick="pasteClip()">📌 Paste</button>
+    <button onclick="duplicateSelectedClip()">⧉ Duplicate</button>
+    <button onclick="renameSelectedClip()">✏ Rename</button>
+    <button onclick="deleteSelectedClip()">🗑 Delete</button>
+    <button onclick="undoTimelineV2()">↶ Undo</button>
+    <button onclick="redoTimelineV2()">↷ Redo</button>
+    <button onclick="resetClipMixV2()">Reset Mix</button>
+  </div>
+  <div class="editor-mix-panel-v45">
+    <label>🔊 Volume <input type="range" min="0" max="200" value="100" oninput="setClipVolumeV2(this.value)"></label>
+    <label>🎚 Pan <input type="range" min="-100" max="100" value="0" oninput="setClipPanV2(this.value)"></label>
+  </div>
+</div>
+<div class="loop-area-box-v4">
+  <div class="loop-area-head-v4">
+    <div>
+      <h3>🔁 Loop Area</h3>
+      <p>Ulang bagian lagu dari titik A sampai B</p>
+    </div>
+    <button onclick="toggleLoopAreaV4()" id="loopToggleBtnV4">Loop OFF</button>
+  </div>
+
+  <div class="loop-area-actions-v4">
+    <button onclick="setLoopStartV4()">🅰 Set A</button>
+    <button onclick="setLoopEndV4()">🅱 Set B</button>
+    <button onclick="playLoopAreaV4()">▶ Play Loop</button>
+    <button onclick="clearLoopAreaV4()">🗑 Clear Loop</button>
+  </div>
+
+  <div class="loop-area-status-v4" id="loopAreaStatusV4">
+    Loop: OFF • A: 1 • B: 16
+  </div>
+</div>
+
+<div class="timeline-time" id="timeDisplay">Waktu: 00:00.00</div>
+<div class="add-track-box"><input id="newTrackTitle" placeholder="Judul track baru"><button onclick="addCustomTrack()">➕ Tambah Track</button></div>
+<div class="timeline-record-box">
+  <div class="timeline-record-head">
+    <div>
+      <h3>📋 List Rekam Timeline</h3>
+      <p>Simpan susunan Editor Musik sebelum masuk Export</p>
+    </div>
+    <button onclick="saveTimelineRecordV4()">💾 Simpan Timeline</button>
+  </div>
+  <div class="timeline-record-list" id="timelineRecordListV4">
+    <span class="empty-record">Belum ada rekam timeline</span>
+  </div>
+</div>
+
+<div class="timeline-scroll" id="timelineScroll">
+  <div class="playhead-line" id="playheadLine"></div>
+<div class="audio-tracks" id="audioTracks"></div>
+  <div class="step-header" id="stepHeader"></div>
+  <div class="timeline-side-nav"><button onclick="prevStepPage()">◀</button><span id="pageTextBottom">1/4</span><button onclick="nextStepPage()">▶</button></div>
+  <div class="timeline-tracks" id="timelineTracks"></div>
+</div>
+<button class="scroll-bottom-btn" onclick="scrollTimelineBottom()">⬇</button>
+<input type="file" id="loadProjectInput" accept=".json" hidden>
+</section>
+
+
+
+<section class="panel export-panel" id="exportPanel">
+  <div class="panel-head">
+    <div>
+      <h2>📤 Export V4</h2>
+      <p>Export dari Timeline Record / List Rekam Timeline</p>
+    </div>
+    <button class="close-btn" onclick="closePanel('exportPanel')">×</button>
+  </div>
+
+  <div class="export-v4-box">
+    <div class="export-v4-head">
+      <div>
+        <h3>📋 Timeline Record</h3>
+        <p>Pilih hasil susunan dari Editor Musik</p>
+      </div>
+      <button onclick="refreshExportTimelineRecordsV4()">🔄 Refresh</button>
+    </div>
+    <div class="export-timeline-list" id="exportTimelineListV4">
+      <span class="empty-record">Belum ada Timeline Record</span>
+    </div>
+  </div>
+
+  <div class="export-v4-box">
+    <h3>📤 Export Timeline Record</h3>
+    <p class="export-v4-info" id="exportSelectedInfoV4">Belum memilih Timeline Record</p>
+    <div class="export-actions-v4">
+      <button onclick="exportSelectedTimelineRecordWavV4()">📤 Export WAV</button>
+      <button onclick="exportSelectedTimelineRecordMp3V4()">📤 Export MP3</button>
+    </div>
+    <div class="export-status-v4" id="exportStatusV4">Status: menunggu pilihan</div>
+  </div>
+
+  <div class="export-v4-box">
+    <h3>📁 Riwayat Export</h3>
+    <div class="export-history-list" id="exportHistoryListV4">
+      <span class="empty-record">Belum ada hasil export</span>
+    </div>
+  </div>
+</section>
+
+
+<section class="panel vocal-panel" id="vocalPanel">
+  <div class="panel-head">
+    <div><h2>🎤 Panel Vokal</h2><p>Rekam, Play, Hapus, dan Tambah ke Timeline</p></div>
+    <button class="close-btn" onclick="closePanel('vocalPanel')">×</button>
+  </div>
+  <div class="vocal-controls">
+    <button id="vocalRecordBtn" onclick="startVocalRecord()">🎤 Rekam</button>
+    <button id="vocalStopBtn" onclick="stopVocalRecord()">⏹ Stop</button>
+  </div>
+  <div class="import-info-box"><b>Status Vokal:</b><span id="vocalStatus">Siap merekam suara dari mic HP</span></div>
+  <div class="record-head import-head-inside"><div><h2>📋 Daftar Rekam Vokal</h2><p>Rekaman vokal yang sudah dibuat</p></div></div>
+  <div class="vocal-list" id="vocalList"><span class="empty-record">Belum ada rekaman vokal</span></div>
+</section>
+
+<section class="panel fx-panel" id="fxPanel">
+  <div class="panel-head">
+    <div>
+      <h2>✨ Panel FX</h2>
+      <p>FX Asset, Import FX, Play, Hapus, dan Tambah ke Timeline</p>
+    </div>
+    <button class="close-btn" onclick="closePanel('fxPanel')">×</button>
+  </div>
+
+  <div class="record-head import-head-inside">
+    <div>
+      <h2>📋 Daftar FX Asset</h2>
+      <p>FX bawaan dari folder assets/fx/</p>
+    </div>
+  </div>
+  <div class="fx-list" id="fxAssetList">
+    <span class="empty-record">Memuat FX asset...</span>
+  </div>
+
+  <div class="fx-divider"></div>
+
+  <div class="import-actions">
+    <button onclick="openFxImportPicker()">📂 Import FX</button>
+    <input type="file" id="fxImportInput" accept="audio/*,.mp3,.wav" hidden>
+  </div>
+
+  <div class="import-info-box">
+    <b>Alur FX:</b>
+    <span>Asset/Import → Play → Tambah ke Timeline Track FX</span>
+  </div>
+
+  <div class="record-head import-head-inside">
+    <div>
+      <h2>📦 List Import FX</h2>
+      <p>FX yang diimport dari HP</p>
+    </div>
+  </div>
+  <div class="fx-list" id="fxImportList">
+    <span class="empty-record">Belum ada import FX</span>
+  </div>
+</section>
+
+
+
+
+<section class="panel midi-panel" id="midiPanel">
+  <div class="panel-head">
+    <div>
+      <h2>🎼 Panel MIDI</h2>
+      <p>Import MIDI, daftar MIDI, info, tambah ke Timeline, dan hapus</p>
+    </div>
+    <button class="close-btn" onclick="closePanel('midiPanel')">×</button>
+  </div>
+
+  <div class="import-actions">
+    <button onclick="openMidiImportPicker()">📂 Import MIDI</button>
+    <input type="file" id="midiImportInput" accept=".mid,.midi,audio/midi" hidden>
+  </div>
+
+  <div class="import-info-box">
+    <b>Alur MIDI:</b>
+    <span>Pilih file .mid/.midi dari HP → masuk Daftar MIDI → Info → Tambah ke Timeline Track MIDI</span>
+  </div>
+
+  <div class="record-head import-head-inside">
+    <div>
+      <h2>📋 Daftar MIDI</h2>
+      <p>File MIDI yang sudah diimport</p>
+    </div>
+  </div>
+
+  <div class="midi-list" id="midiList">
+    <span class="empty-record">Belum ada MIDI</span>
+  </div>
+</section>
+</div><input type="file" id="importInput" accept="audio/*,.mp3,.wav" hidden>
+
+<script>
+/* ===== EMERGENCY INLINE PANEL FIX ===== */
+(function(){
+  const ids=['drumPanel','pianoPanel','guitarPanel','bassPanel','vocalPanel','fxPanel','midiPanel','timelinePanel','importPanel','exportPanel','projectPanel'];
+
+  window.closeAllPanels=function(){
+    ids.forEach(function(id){
+      const p=document.getElementById(id);
+      if(p)p.classList.remove('show');
+    });
+    const b=document.getElementById('panelBackdrop');
+    if(b)b.classList.remove('show');
+    document.body.classList.remove('panel-open');
+  };
+
+  window.openPanel=function(id){
+    window.closeAllPanels();
+    const p=document.getElementById(id);
+    if(!p){
+      alert('Panel tidak ditemukan: '+id);
+      return;
+    }
+    p.classList.add('show');
+    const b=document.getElementById('panelBackdrop');
+    if(b)b.classList.add('show');
+    document.body.classList.add('panel-open');
+    try{p.scrollTop=0;}catch(e){}
+  };
+
+  window.closePanel=function(id){
+    const p=document.getElementById(id);
+    if(p)p.classList.remove('show');
+    const any=document.querySelector('.panel.show');
+    if(!any){
+      const b=document.getElementById('panelBackdrop');
+      if(b)b.classList.remove('show');
+      document.body.classList.remove('panel-open');
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('.tile[onclick*="openPanel"]').forEach(function(tile){
+      const raw=tile.getAttribute('onclick')||'';
+      const m=raw.match(/openPanel\(['"]([^'"]+)['"]\)/);
+      if(!m)return;
+      const id=m[1];
+      tile.onclick=function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        window.openPanel(id);
+        return false;
+      };
+    });
+  });
+})();
+</script>
+
+<div class="marker-box-v4">
+<h3>📌 Marker Final</h3>
+<div class="marker-actions-v4">
+<button onclick="addMarkerV4()">➕ Tambah Marker</button>
+</div>
+<div id="markerListV4" class="marker-list-v4"></div>
+</div>
+
+<section class="panel" id="projectPanel">
+<div class="panel-head">
+<div><h2>📁 Project</h2><p>Save, Load, dan Clear Project</p></div>
+<button class="close-btn" onclick="closePanel('projectPanel')">×</button>
+</div>
+<div class="project-actions-v45">
+<button onclick="saveProject()">💾 Save Project</button>
+<button onclick="loadProjectClick()">📂 Load Project</button>
+<button onclick="clearTimeline()">🗑 Clear Project</button>
+</div>
+
+<div class="project-v4-box">
+<h3>📁 Folder Project</h3>
+<button onclick="createProjectV4()">➕ Buat Project</button>
+<div id="projectListV4" class="project-list-v4">
+<span class="empty-record">Belum ada project</span>
+</div>
+</div>
+</section>
+
+<div id="masterCompatHiddenV45" class="master-compat-hidden-v45" aria-hidden="true">
+  <span id="masterVolumeText">95%</span>
+  <span id="masterMeterText">0%</span>
+  <span id="masterMeterFill"></span>
+  <span id="timelineMasterMeterFill"></span>
+  <span id="recordStatus">Status: Idle</span>
+  <div id="masterWaveform"><span class="empty-record">Belum ada hasil rekam</span></div>
+</div>
+
+
+<div id="patternCompatHiddenV45" class="pattern-compat-hidden-v45" aria-hidden="true">
+  <div id="savedPatternListV4"><span class="empty-record">Belum ada pattern tersimpan</span></div>
+</div>
+
+
+<div id="timelineRecordCompatV45" class="timeline-record-compat-v45" aria-hidden="true">
+  <div id="recordList" class="record-list">
+    <span class="empty-record">Belum ada nada direkam</span>
+  </div>
+</div>
+<script src="lame.min.js"></script>
+<script src="js/audio-engine.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/import.js"></script>
+<script src="js/export.js"></script>
+<script src="js/project.js"></script>
+<script src="js/drum.js"></script>
+<script src="js/piano.js"></script>
+<script src="js/guitar.js"></script>
+<script src="js/bass.js"></script>
+<script src="script.js"></script>
+<script src="js/editor-musik.js"></script>
+<script src="js/vokal.js"></script>
+<script src="js/midi.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/main.js"></script>
+</body></html>
