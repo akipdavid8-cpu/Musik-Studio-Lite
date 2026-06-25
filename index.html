@@ -181,9 +181,37 @@ Belum ada rekaman.
 
 </section>
 
-<section class="panel" id="bassPanel"><div class="panel-head"><div><h2>🎸 Bass Pad</h2><p>16 pad nada bass sintetis</p></div><button class="close-btn" onclick="closePanel('bassPanel')">×</button></div><div class="pad-grid piano-grid">
-<button class="pad piano-pad" onclick="playBass('C2')">C2</button><button class="pad piano-pad" onclick="playBass('D2')">D2</button><button class="pad piano-pad" onclick="playBass('E2')">E2</button><button class="pad piano-pad" onclick="playBass('F2')">F2</button><button class="pad piano-pad" onclick="playBass('G2')">G2</button><button class="pad piano-pad" onclick="playBass('A2')">A2</button><button class="pad piano-pad" onclick="playBass('B2')">B2</button><button class="pad piano-pad" onclick="playBass('C3')">C3</button><button class="pad piano-pad" onclick="playBass('D3')">D3</button><button class="pad piano-pad" onclick="playBass('E3')">E3</button><button class="pad piano-pad" onclick="playBass('F3')">F3</button><button class="pad piano-pad" onclick="playBass('G3')">G3</button><button class="pad piano-pad" onclick="playBass('A3')">A3</button><button class="pad piano-pad" onclick="playBass('B3')">B3</button><button class="pad piano-pad" onclick="playBass('C4')">C4</button><button class="pad piano-pad" onclick="playBass('D4')">D4</button></div></section>
+<section class="panel" id="bassPanel">
+  <div class="panel-head">
+    <div>
+      <h2>🎸 Bass Pad</h2>
+      <p>32 Pad • 12 Asset • Pitch Up Only • Hold/Sustain</p>
+    </div>
+    <button class="close-btn" onclick="closePanel('bassPanel')">×</button>
+  </div>
 
+  <div class="bass-status-box">
+    <button onclick="loadBassAssets()">📁 Load Asset Bass</button>
+
+    <div id="bassStatus">🔴 Bass Asset Belum Dimuat</div>
+
+    <div class="bass-controls">
+      <button id="bassRecordBtn" onclick="toggleBassRecord()">⏺ Record OFF</button>
+      <button id="bassHoldBtn" onclick="toggleBassHold()">🖐 Hold OFF</button>
+      <button onclick="playBassRecord()">▶ Play Rekam</button>
+      <button onclick="clearBassRecord()">🗑 Hapus Rekam</button>
+      <button onclick="addBassToTimeline()">➕ Tambah ke Timeline</button>
+    </div>
+  </div>
+
+  <div class="pad-grid bass-grid" id="bassPadGrid"></div>
+
+  <div class="record-panel">
+    <h3>📋 List Rekam Bass</h3>
+    <div id="bassRecordList">Belum ada rekaman bass.</div>
+  </div>
+</section>
+  
 <section class="panel timeline-panel" id="timelinePanel"><div class="panel-head"><div><h2>🎼 Editor Musik V2</h2><p>Jantung Musik Studio Lite: track, clip, pattern, dan persiapan export</p></div><div class="panel-actions"><button class="scroll-btn" onclick="scrollTimelineTop()">⬆</button><button class="close-btn" onclick="closePanel('timelinePanel')">×</button></div></div>
 <div class="timeline-controls">
 <button onclick="stopTimeline()">⏹ Stop</button>
