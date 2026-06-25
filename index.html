@@ -46,17 +46,64 @@
   </div>
 </section>
 
-<section class="panel" id="drumPanel">
-  <div class="panel-head"><div><h2>🥁 Drum Pad</h2><p>16 pad WAV asset asli + fallback sintetis jika file belum ada</p></div><button class="close-btn" onclick="closePanel('drumPanel')">×</button></div>
-  <div class="pad-grid piano-grid">
-    <button class="pad piano-pad" onclick="playDrum('kick')">Kick</button><button class="pad piano-pad" onclick="playDrum('snare')">Snare</button><button class="pad piano-pad" onclick="playDrum('hihat_closed')">Hi-Hat</button><button class="pad piano-pad" onclick="playDrum('clap')">Clap</button>
-    <button class="pad piano-pad" onclick="playDrum('tom_high')">Tom High</button><button class="pad piano-pad" onclick="playDrum('tom_mid')">Tom Mid</button><button class="pad piano-pad" onclick="playDrum('tom_low')">Tom Low</button><button class="pad piano-pad" onclick="playDrum('crash')">Crash</button>
-    <button class="pad piano-pad" onclick="playDrum('ride')">Ride</button><button class="pad piano-pad" onclick="playDrum('cymbal')">Cymbal</button><button class="pad piano-pad" onclick="playDrum('shaker')">Shaker</button><button class="pad piano-pad" onclick="playDrum('tambourine')">Tambourine</button>
-    <button class="pad piano-pad" onclick="playDrum('cowbell')">Cowbell</button><button class="pad piano-pad" onclick="playDrum('perc')">Perc</button><button class="pad piano-pad" onclick="playDrum('bloom_perc')">Bloom Perc</button><button class="pad piano-pad" onclick="playDrum('fx_hit')">FX Hit</button>
-  </div>
-</section>
+<section class="panel drum-panel" id="drumPanel">
 
-<section class="panel piano-panel" id="pianoPanel">
+  <div class="panel-head">
+  
+  <div>
+  <h2>🥁 Drum Pad</h2><p>16 pad WAV asset asli + fallback sintetis jika file belum ada
+  </p></div><button class="close-btn" onclick="closePanel('drumPanel')">×</button>
+  </div>
+  
+  <div class="drum-status-box">
+   
+<button onclick="loadDrumAssets()">
+📁 Load Asset Drum
+</button>
+
+<div id="drumStatus">
+🔴 Asset Drum Belum Dimuat
+</div>
+
+<div class="drum-controls">
+
+<button id="drumRecordBtn"
+onclick="toggleDrumRecord()">
+⏺ Record OFF
+</button>
+
+<button onclick="playDrumRecord()">
+▶ Play Rekam
+</button>
+
+<button onclick="clearDrumRecord()">
+🗑 Hapus Rekam
+</button>
+
+<button onclick="addDrumToTimeline()">
+➕ Tambah ke Timeline
+</button>
+
+</div>
+
+  <div class="pad-grid drum-grid">
+    <button class="pad drum-pad" onclick="playDrum('kick')">Kick</button><button class="pad drum-pad" onclick="playDrum('snare')">Snare</button><button class="pad drum-pad" onclick="playDrum('hihat_closed')">Hi-Hat</button><button class="pad drum-pad" onclick="playDrum('clap')">Clap</button>
+    <button class="pad drum-pad" onclick="playDrum('tom_high')">Tom High</button><button class="pad drum-pad" onclick="playDrum('tom_mid')">Tom Mid</button><button class="pad drum-pad" onclick="playDrum('tom_low')">Tom Low</button><button class="pad drum-pad" onclick="playDrum('crash')">Crash</button>
+    <button class="pad drum-pad" onclick="playDrum('ride')">Ride</button><button class="pad drum-pad" onclick="playDrum('cymbal')">Cymbal</button><button class="pad drum-pad" onclick="playDrum('shaker')">Shaker</button><button class="pad drum-pad" onclick="playDrum('tambourine')">Tambourine</button>
+    <button class="pad drum-pad" onclick="playDrum('cowbell')">Cowbell</button><button class="pad drum-pad" onclick="playDrum('perc')">Perc</button><button class="pad drum-pad" onclick="playDrum('bloom_perc')">Bloom Perc</button><button class="pad drum-pad" onclick="playDrum('fx_hit')">FX Hit</button>
+  </div>
+
+    <div class="record-panel">
+
+<h3>📋 List Rekam drum</h3>
+
+<div id="drumRecordList">
+Belum ada rekaman.
+</div>
+ </div>
+  </div>
+   </section> 
+  <section class="panel piano-panel" id="pianoPanel">
   <div class="panel-head">
     <div>
       <h2>🎹 Piano Pad Pro</h2>
