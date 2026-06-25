@@ -1,0 +1,1200 @@
+/* ===== MUSIK STUDIO LITE - MAIN CSS ===== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0a0a15;
+  color: #e0e0e0;
+}
+
+body.panel-open {
+  overflow: hidden;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+  border-bottom: 2px solid #9d4edd;
+  padding: 12px 16px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+}
+
+header h1 {
+  font-size: 24px;
+  color: #e0aaff;
+  text-shadow: 0 0 10px #9d4edd;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* ===== MAIN APP CONTAINER ===== */
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #0a0a15;
+}
+
+/* ===== GRID LAYOUT ===== */
+.grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: linear-gradient(180deg, #0a0a15 0%, #1a0a2e 100%);
+}
+
+.grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.grid::-webkit-scrollbar-track {
+  background: #0a0a15;
+}
+
+.grid::-webkit-scrollbar-thumb {
+  background: #9d4edd;
+  border-radius: 3px;
+}
+
+/* ===== TILE STYLING ===== */
+.tile {
+  aspect-ratio: 1;
+  border: 2px solid #9d4edd;
+  background: linear-gradient(135deg, #1a0033 0%, #2d0052 100%);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(157, 78, 221, 0.2);
+}
+
+.tile:active,
+.tile:hover {
+  border-color: #c77dff;
+  background: linear-gradient(135deg, #2d0052 0%, #440077 100%);
+  box-shadow: 0 0 20px rgba(199, 125, 255, 0.5);
+  transform: scale(0.95);
+}
+
+.tile .icon {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.tile .label {
+  font-size: 12px;
+  color: #e0aaff;
+  text-align: center;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ===== PANEL BACKDROP ===== */
+.panel-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 98;
+  display: none;
+}
+
+.panel-backdrop.show {
+  display: block;
+}
+
+/* ===== PANEL STYLING ===== */
+.panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 90vh;
+  max-height: 90vh;
+  background: linear-gradient(180deg, #1a0a2e 0%, #0a0a15 100%);
+  border: 2px solid #9d4edd;
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  z-index: 99;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 -5px 30px rgba(157, 78, 221, 0.4);
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.panel.show {
+  display: flex;
+}
+
+/* ===== PANEL HEAD ===== */
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px;
+  border-bottom: 1px solid #9d4edd;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.panel-head div {
+  flex: 1;
+}
+
+.panel-head h2 {
+  font-size: 18px;
+  color: #e0aaff;
+  margin-bottom: 4px;
+  text-shadow: 0 0 8px rgba(157, 78, 221, 0.3);
+}
+
+.panel-head p {
+  font-size: 12px;
+  color: #b0a0cc;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.close-btn,
+.scroll-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #9d4edd;
+  background: linear-gradient(135deg, #2d0052 0%, #1a0033 100%);
+  color: #e0aaff;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.close-btn:active,
+.scroll-btn:active {
+  border-color: #c77dff;
+  background: linear-gradient(135deg, #440077 0%, #2d0052 100%);
+  box-shadow: 0 0 10px rgba(199, 125, 255, 0.3);
+}
+
+/* ===== PANEL CONTENT SCROLL ===== */
+.panel > div:not(.panel-head) {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.panel > div:not(.panel-head)::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel > div:not(.panel-head)::-webkit-scrollbar-track {
+  background: #0a0a15;
+}
+
+.panel > div:not(.panel-head)::-webkit-scrollbar-thumb {
+  background: #9d4edd;
+  border-radius: 3px;
+}
+
+/* ===== BUTTONS ===== */
+button {
+  padding: 10px 12px;
+  border: 1px solid #9d4edd;
+  background: linear-gradient(135deg, #2d0052 0%, #1a0033 100%);
+  color: #e0aaff;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+button:active {
+  border-color: #c77dff;
+  background: linear-gradient(135deg, #440077 0%, #2d0052 100%);
+  box-shadow: 0 0 10px rgba(199, 125, 255, 0.3);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== STATUS & INFO BOXES ===== */
+.import-info-box,
+.piano-asset-box-v45,
+.guitar-status-box,
+.bass-status-box {
+  background: rgba(157, 78, 221, 0.1);
+  border: 1px solid #9d4edd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.import-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.import-info-box b,
+.import-info-box span {
+  font-size: 12px;
+  color: #e0aaff;
+}
+
+.import-info-box span {
+  color: #b0a0cc;
+}
+
+/* ===== IMPORT/EXPORT ACTIONS ===== */
+.import-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.import-actions button {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* ===== RECORD HEAD ===== */
+.record-head,
+.import-head-inside {
+  border-top: 1px solid #9d4edd;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.record-head h2,
+.import-head-inside h2 {
+  font-size: 16px;
+  color: #e0aaff;
+  margin-bottom: 4px;
+}
+
+.record-head p,
+.import-head-inside p {
+  font-size: 12px;
+  color: #b0a0cc;
+}
+
+/* ===== LISTS ===== */
+.import-list,
+.piano-record-list-v45,
+.guitar-record-list,
+.bass-record-list,
+.vocal-list,
+.fx-list,
+.fx-import-list,
+.midi-list,
+.marker-list-v4,
+.project-list-v4,
+.saved-pattern-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.empty-record {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  color: #6a5acd;
+  font-size: 12px;
+  background: rgba(157, 78, 221, 0.05);
+  border-radius: 6px;
+  border: 1px dashed #9d4edd;
+}
+
+/* ===== PAD GRIDS ===== */
+.pad-grid {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.piano-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.piano-72-grid-v45 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.guitar-grid {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.bass-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.pad {
+  aspect-ratio: 1;
+  border: 1px solid #9d4edd;
+  background: linear-gradient(135deg, #2d0052 0%, #1a0033 100%);
+  color: #e0aaff;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px;
+}
+
+.pad:active {
+  border-color: #c77dff;
+  background: linear-gradient(135deg, #440077 0%, #2d0052 100%);
+  box-shadow: 0 0 10px rgba(199, 125, 255, 0.4);
+  transform: scale(0.95);
+}
+
+.piano-pad {
+  aspect-ratio: 1;
+}
+
+.guitar-pad {
+  aspect-ratio: 1;
+}
+
+/* ===== CONTROLS SECTIONS ===== */
+.piano-controls-v45,
+.bass-controls,
+.guitar-controls,
+.vocal-controls {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.piano-controls-v45 button,
+.bass-controls button,
+.guitar-controls button,
+.vocal-controls button {
+  flex: 1;
+  min-width: 80px;
+}
+
+/* ===== STATUS DISPLAYS ===== */
+.piano-status-v45,
+.guitar-status,
+.bass-status,
+.piano-info-v45 {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin: 8px 0;
+  text-align: center;
+  border: 1px solid #9d4edd;
+  background: rgba(157, 78, 221, 0.05);
+}
+
+.piano-status-v45.fail,
+.guitar-status,
+.bass-status {
+  color: #ff6b9d;
+  border-color: #ff6b9d;
+}
+
+.piano-status-v45.success {
+  color: #00ff88;
+  border-color: #00ff88;
+}
+
+/* ===== BANK NAVIGATION ===== */
+.piano-bank-nav-v45 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.piano-bank-nav-v45 button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 16px;
+}
+
+.piano-bank-nav-v45 strong {
+  font-size: 14px;
+  color: #e0aaff;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ===== TIMELINE STYLING ===== */
+.timeline-panel {
+  height: 100% !important;
+}
+
+.timeline-controls {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 12px;
+  border-bottom: 1px solid #9d4edd;
+  background: rgba(157, 78, 221, 0.05);
+}
+
+.timeline-controls button {
+  flex: 1;
+  min-width: 60px;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+
+.timeline-controls strong {
+  display: flex;
+  align-items: center;
+  color: #e0aaff;
+  font-size: 12px;
+  padding: 0 8px;
+  min-width: 70px;
+  text-align: center;
+  border: 1px solid #9d4edd;
+  border-radius: 4px;
+  background: rgba(157, 78, 221, 0.1);
+}
+
+/* ===== PAGE NAVIGATION ===== */
+.page-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(157, 78, 221, 0.05);
+  border-bottom: 1px solid #9d4edd;
+}
+
+.page-nav button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: 14px;
+}
+
+.page-nav strong {
+  font-size: 12px;
+  color: #e0aaff;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* ===== TIMELINE TIME DISPLAY ===== */
+.timeline-time {
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 12px;
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 4px;
+  margin: 8px 0;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+/* ===== NOTE EDITOR CONTROLS ===== */
+.note-editor-controls {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 12px;
+  background: rgba(157, 78, 221, 0.05);
+  border-bottom: 1px solid #9d4edd;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.note-editor-controls button {
+  flex: 1;
+  min-width: 70px;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+
+/* ===== LOOP AREA ===== */
+.loop-area-box-v4 {
+  background: rgba(157, 78, 221, 0.1);
+  border: 1px solid #9d4edd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.loop-area-head-v4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.loop-area-head-v4 h3 {
+  font-size: 14px;
+  color: #e0aaff;
+  margin-bottom: 4px;
+}
+
+.loop-area-head-v4 p {
+  font-size: 12px;
+  color: #b0a0cc;
+}
+
+.loop-area-head-v4 button {
+  flex-shrink: 0;
+}
+
+.loop-area-actions-v4 {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.loop-area-actions-v4 button {
+  flex: 1;
+  min-width: 80px;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+
+.loop-area-status-v4 {
+  padding: 8px 12px;
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 4px;
+  font-size: 11px;
+  color: #00ff88;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+}
+
+/* ===== ADD TRACK BOX ===== */
+.add-track-box {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(157, 78, 221, 0.05);
+  border: 1px solid #9d4edd;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.add-track-box input {
+  flex: 1;
+  border: 1px solid #9d4edd;
+  background: rgba(157, 78, 221, 0.05);
+  color: #e0aaff;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 12px;
+}
+
+.add-track-box input::placeholder {
+  color: #6a5acd;
+}
+
+.add-track-box input:focus {
+  outline: none;
+  border-color: #c77dff;
+  box-shadow: 0 0 8px rgba(199, 125, 255, 0.2);
+}
+
+.add-track-box button {
+  min-width: 120px;
+}
+
+/* ===== TIMELINE RECORD BOX ===== */
+.timeline-record-box {
+  background: rgba(157, 78, 221, 0.1);
+  border: 1px solid #9d4edd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.timeline-record-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.timeline-record-head h3 {
+  font-size: 14px;
+  color: #e0aaff;
+  margin-bottom: 4px;
+}
+
+.timeline-record-head p {
+  font-size: 12px;
+  color: #b0a0cc;
+}
+
+.timeline-record-head button {
+  flex-shrink: 0;
+}
+
+.timeline-record-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ===== TIMELINE SCROLL AREA ===== */
+.timeline-scroll {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(180deg, rgba(26, 10, 46, 0.5) 0%, rgba(10, 10, 21, 0.8) 100%);
+  border: 1px dashed #9d4edd;
+  border-radius: 6px;
+  overflow: auto;
+  margin-bottom: 8px;
+}
+
+.timeline-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.timeline-scroll::-webkit-scrollbar-track {
+  background: rgba(157, 78, 221, 0.05);
+}
+
+.timeline-scroll::-webkit-scrollbar-thumb {
+  background: #9d4edd;
+  border-radius: 3px;
+}
+
+.playhead-line {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, #00ff88 0%, rgba(0, 255, 136, 0.3) 100%);
+  top: 0;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+}
+
+.audio-tracks {
+  display: none;
+}
+
+.step-header {
+  display: flex;
+  border-bottom: 1px solid #9d4edd;
+  background: rgba(157, 78, 221, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.timeline-tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  min-height: 400px;
+}
+
+.timeline-side-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  border-top: 1px solid #9d4edd;
+  background: rgba(157, 78, 221, 0.05);
+}
+
+.scroll-bottom-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 16px;
+}
+
+/* ===== SCROLL BUTTONS ===== */
+.scroll-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 14px;
+}
+
+/* ===== EXPORT STYLING ===== */
+.export-v4-box {
+  background: rgba(157, 78, 221, 0.1);
+  border: 1px solid #9d4edd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.export-v4-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.export-v4-head h3 {
+  font-size: 14px;
+  color: #e0aaff;
+  margin-bottom: 4px;
+}
+
+.export-v4-head p {
+  font-size: 12px;
+  color: #b0a0cc;
+}
+
+.export-v4-head button {
+  flex-shrink: 0;
+}
+
+.export-timeline-list,
+.export-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.export-actions-v4 {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.export-actions-v4 button {
+  flex: 1;
+  min-width: 120px;
+}
+
+.export-v4-info {
+  padding: 8px 12px;
+  background: rgba(157, 78, 221, 0.05);
+  border: 1px solid #9d4edd;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #b0a0cc;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.export-status-v4 {
+  padding: 8px 12px;
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 4px;
+  font-size: 11px;
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+}
+
+/* ===== VOCAL PANEL ===== */
+.vocal-controls {
+  padding: 12px;
+  background: rgba(157, 78, 221, 0.05);
+  border: 1px solid #9d4edd;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.vocal-controls button {
+  flex: 1;
+  padding: 10px;
+}
+
+.vocal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ===== FX PANEL ===== */
+.fx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.fx-divider {
+  border-top: 2px solid #9d4edd;
+  margin: 12px 0;
+}
+
+.fx-panel .import-actions {
+  margin-bottom: 12px;
+}
+
+/* ===== MARKER BOX ===== */
+.marker-box-v4 {
+  background: rgba(157, 78, 221, 0.1);
+  border: 1px solid #9d4edd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.marker-box-v4 h3 {
+  font-size: 14px;
+  color: #e0aaff;
+  margin-bottom: 8px;
+}
+
+.marker-actions-v4 {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.marker-actions-v4 button {
+  flex: 1;
+}
+
+.marker-list-v4 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ===== PROJECT PANEL ===== */
+.project-v4-box {
+  background: rgba(157, 78, 221, 0.1);
+  border: 1px solid #9d4edd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.project-v4-box h3 {
+  font-size: 14px;
+  color: #e0aaff;
+  margin-bottom: 8px;
+}
+
+.project-actions-v45 {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.project-actions-v45 button {
+  flex: 1;
+  min-width: 100px;
+}
+
+.project-list-v4 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ===== RECORD PANEL ===== */
+.record-panel {
+  background: rgba(157, 78, 221, 0.1);
+  border: 1px solid #9d4edd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.record-panel h3 {
+  font-size: 14px;
+  color: #e0aaff;
+  margin-bottom: 8px;
+}
+
+/* ===== HIDDEN COMPATIBILITY BOXES ===== */
+.master-compat-hidden-v45,
+.pattern-compat-hidden-v45,
+.timeline-record-compat-v45 {
+  display: none;
+}
+
+/* ===== RECORD ITEMS ===== */
+.record-item,
+.import-item,
+.piano-record-item,
+.guitar-record-item,
+.bass-record-item,
+.marker-item,
+.project-item {
+  background: linear-gradient(135deg, rgba(157, 78, 221, 0.15) 0%, rgba(157, 78, 221, 0.05) 100%);
+  border: 1px solid #9d4edd;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.record-item span,
+.import-item span,
+.piano-record-item span,
+.guitar-record-item span,
+.bass-record-item span,
+.marker-item span,
+.project-item span {
+  font-size: 12px;
+  color: #e0aaff;
+  flex: 1;
+}
+
+.record-item button,
+.import-item button,
+.piano-record-item button,
+.guitar-record-item button,
+.bass-record-item button,
+.marker-item button,
+.project-item button {
+  padding: 6px 10px;
+  font-size: 11px;
+  min-width: 60px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pad-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .piano-72-grid-v45 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .guitar-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  header h1 {
+    font-size: 18px;
+  }
+
+  .tile .icon {
+    font-size: 24px;
+  }
+
+  .tile .label {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .pad-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .piano-72-grid-v45 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .guitar-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .bass-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  header h1 {
+    font-size: 16px;
+  }
+
+  .tile .icon {
+    font-size: 20px;
+  }
+
+  .tile .label {
+    font-size: 9px;
+  }
+
+  button {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .panel {
+    height: 95vh;
+    max-height: 95vh;
+  }
+
+  .timeline-controls,
+  .note-editor-controls {
+    gap: 4px;
+  }
+
+  .timeline-controls button,
+  .note-editor-controls button {
+    min-width: 50px;
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+}
+
+/* ===== INPUT STYLING ===== */
+input[type="file"] {
+  display: none;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 8px 12px;
+  border: 1px solid #9d4edd;
+  background: rgba(157, 78, 221, 0.05);
+  color: #e0aaff;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #c77dff;
+  box-shadow: 0 0 8px rgba(199, 125, 255, 0.2);
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+  color: #6a5acd;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.success {
+  color: #00ff88 !important;
+  border-color: #00ff88 !important;
+}
+
+.error {
+  color: #ff6b9d !important;
+  border-color: #ff6b9d !important;
+}
+
+.warning {
+  color: #ffaa00 !important;
+  border-color: #ffaa00 !important;
+}
+
+.info {
+  color: #00d4ff !important;
+  border-color: #00d4ff !important;
+}
+
+/* ===== SMOOTH TRANSITIONS ===== */
+* {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* ===== SCROLLBAR GLOBAL ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(157, 78, 221, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9d4edd;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c77dff;
+}
+#guitarStatus,
+#bassStatus,
+#pianoAssetStatusV45{
+  display:block;
+  padding:10px 12px;
+  margin:8px 0;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:900;
+  text-align:center;
+  background:rgba(255,107,157,.08);
+  color:#ff6b9d;
+  border:1px solid #ff6b9d;
+}
+
+#guitarStatus.success,
+#bassStatus.success,
+#pianoAssetStatusV45.success{
+  background:rgba(0,255,136,.08);
+  color:#00ff88;
+  border-color:#00ff88;
+}
+
+#guitarStatus.loading,
+#bassStatus.loading,
+#pianoAssetStatusV45.loading{
+  background:rgba(255,170,0,.08);
+  color:#ffaa00;
+  border-color:#ffaa00;
+}
