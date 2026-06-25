@@ -369,18 +369,41 @@ Belum ada rekaman.
 
 
 <section class="panel vocal-panel" id="vocalPanel">
+
   <div class="panel-head">
-    <div><h2>🎤 Panel Vokal</h2><p>Rekam, Play, Hapus, dan Tambah ke Timeline</p></div>
+    <div>
+      <h2>🎤 Vokal Panel V4.5</h2>
+      <p>Rekam vokal, bersihkan noise, perhalus suara, dan tambah ke timeline</p>
+    </div>
     <button class="close-btn" onclick="closePanel('vocalPanel')">×</button>
   </div>
-  <div class="vocal-controls">
-    <button id="vocalRecordBtn" onclick="startVocalRecord()">🎤 Rekam</button>
-    <button id="vocalStopBtn" onclick="stopVocalRecord()">⏹ Stop</button>
+
+  <div class="vocal-status-box">
+    <div id="vocalStatus">🔴 Belum Mulai</div>
+
+    <div class="vocal-controls">
+      <button id="vocalRecordToggleBtn" onclick="toggleVocalRecord()">🎤 Rekam OFF</button>
+      <button id="vocalStopBtn" onclick="pauseVocalRecord()">⏹ Stop</button>
+      <button onclick="playLastVocal()">▶ Play</button>
+    </div>
   </div>
-  <div class="import-info-box"><b>Status Vokal:</b><span id="vocalStatus">Siap merekam suara dari mic HP</span></div>
-  <div class="record-head import-head-inside"><div><h2>📋 Daftar Rekam Vokal</h2><p>Rekaman vokal yang sudah dibuat</p></div></div>
-  <div class="vocal-list" id="vocalList"><span class="empty-record">Belum ada rekaman vokal</span></div>
+
+  <div class="vocal-effect-box">
+    <button id="noiseBtn" onclick="toggleNoiseClean()">🧹 Bersihkan Noise OFF</button>
+    <button id="smoothBtn" onclick="toggleVocalSmooth()">✨ Perhalus Vokal OFF</button>
+    <button id="focusBtn" onclick="toggleVocalFocus()">🎯 Focus Vokal OFF</button>
+  </div>
+
+  <div class="record-panel">
+    <h3>📋 List Rekam Vokal</h3>
+
+    <div id="vocalList">
+      Belum ada rekaman vokal.
+    </div>
+  </div>
+
 </section>
+
 
 <section class="panel fx-panel" id="fxPanel">
   <div class="panel-head">
