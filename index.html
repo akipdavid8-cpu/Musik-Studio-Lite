@@ -406,45 +406,59 @@ Belum ada rekaman.
 
 
 <section class="panel fx-panel" id="fxPanel">
+
   <div class="panel-head">
     <div>
-      <h2>✨ Panel FX</h2>
-      <p>FX Asset, Import FX, Play, Hapus, dan Tambah ke Timeline</p>
+      <h2>✨ FX Panel V4.5</h2>
+      <p>30 Default FX + 30 User FX + Record + Timeline</p>
     </div>
     <button class="close-btn" onclick="closePanel('fxPanel')">×</button>
   </div>
 
-  <div class="record-head import-head-inside">
-    <div>
-      <h2>📋 Daftar FX Asset</h2>
-      <p>FX bawaan dari folder assets/fx/</p>
+  <div class="fx-status-box">
+    <button onclick="loadFxAssets()">📁 Load Asset FX</button>
+    <div id="fxStatus">🔴 Asset FX Belum Dimuat</div>
+    <div id="fxInfo">Default FX: 0/30 • User FX: 0/30</div>
+
+    <div class="fx-controls">
+      <button id="fxRecordBtn" onclick="toggleFxRecord()">⏺ Record OFF</button>
+      <button onclick="stopFxPlayback()">⏹ Stop</button>
+      <button onclick="playFxRecord()">▶ Play Rekam</button>
+      <button onclick="clearFxRecord()">🗑 Hapus Rekam</button>
+      <button onclick="addFxToTimeline()">➕ Tambah ke Timeline</button>
     </div>
   </div>
-  <div class="fx-list" id="fxAssetList">
-    <span class="empty-record">Memuat FX asset...</span>
+
+  <div class="fx-effect-box">
+    <button id="fxReverbBtn" onclick="toggleFxReverb()">🌀 Reverb OFF</button>
+    <button id="fxDelayBtn" onclick="toggleFxDelay()">⏱ Delay OFF</button>
+    <button id="fxPitchBtn" onclick="toggleFxPitch()">🎵 Pitch OFF</button>
+    <button id="fxReverseBtn" onclick="toggleFxReverse()">🔄 Reverse OFF</button>
   </div>
 
-  <div class="fx-divider"></div>
+  <div class="fx-bank-nav">
+    <button onclick="prevFxBank()">‹</button>
+    <strong id="fxBankTitle">[A] Default FX</strong>
+    <button onclick="nextFxBank()">›</button>
+  </div>
 
-  <div class="import-actions">
-    <button onclick="openFxImportPicker()">📂 Import FX</button>
+  <div id="fxBankMessage">Bank A Default FX siap digunakan setelah asset dimuat.</div>
+
+  <div class="pad-grid fx-grid" id="fxDefaultGrid"></div>
+
+  <div class="fx-user-tools" id="fxUserTools" style="display:none;">
+    <button onclick="openFxImportPicker()">📂 Import User FX</button>
     <input type="file" id="fxImportInput" accept="audio/*,.mp3,.wav" hidden>
+    <div id="fxImportStatus">Belum ada User FX. Tekan Import FX.</div>
   </div>
 
-  <div class="import-info-box">
-    <b>Alur FX:</b>
-    <span>Asset/Import → Play → Tambah ke Timeline Track FX</span>
+  <div class="pad-grid fx-grid" id="fxUserGrid" style="display:none;"></div>
+
+  <div class="record-panel">
+    <h3>📋 List Rekam FX</h3>
+    <div id="fxRecordList">Belum ada rekaman FX.</div>
   </div>
 
-  <div class="record-head import-head-inside">
-    <div>
-      <h2>📦 List Import FX</h2>
-      <p>FX yang diimport dari HP</p>
-    </div>
-  </div>
-  <div class="fx-list" id="fxImportList">
-    <span class="empty-record">Belum ada import FX</span>
-  </div>
 </section>
 
 
