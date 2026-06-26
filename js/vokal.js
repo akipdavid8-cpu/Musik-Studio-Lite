@@ -537,3 +537,155 @@ function updateVocalList(){
 
     });
 }
+/* =========================================
+   VOCAL.JS PRO - TAHAP 4
+   Timeline Integration
+========================================= */
+
+/* ===== TAMBAH VOKAL KE TIMELINE ===== */
+function addVocalToTimeline(id){
+
+    const rec = vocalRecords.find(r => r.id === id);
+
+    if(!rec){
+        alert("Rekaman vokal tidak ditemukan.");
+        return;
+    }
+
+    if(typeof importedAudioTracks !== "undefined"){
+
+        importedAudioTracks.push({
+            id: rec.id,
+            name: rec.name,
+            fileName: rec.name + ".webm",
+            type: "vocal",
+            duration: rec.duration / 1000,
+            waveform: [],
+            offset: 0,
+            url: rec.url
+        });
+
+    }
+
+    if(typeof renderTimeline === "function"){
+        renderTimeline();
+    }
+
+    if(typeof updateImportList === "function"){
+        updateImportList();
+    }
+
+    alert(rec.name + " berhasil masuk ke Timeline.");
+
+}
+
+/* ===== UPDATE LIST VERSI TIMELINE ===== */
+/* Menimpa updateVocalList dari Tahap 3 agar ada tombol Timeline */
+function updateVocalList(){
+
+    const box = document.getElementById("vocalList");
+
+    if(!box)return;
+
+    if(vocalRecords.length === 0){
+
+        box.innerHTML = "Belum ada rekaman.";
+
+        return;
+
+    }
+
+    box.innerHTML = "";
+
+    vocalRecords.forEach(function(rec,index){
+
+        let progressText = "";
+
+        if(rec.processed){
+            progressText = "✅ Sukses";
+        }else if(rec.progress && rec.progress > 0){
+            progressText = "Memperhalus proses " + rec.progress + "%";
+        }else{
+            progressText = "Belum diproses";
+        }
+
+        box.innerHTML += `
+
+<div class="record-item">
+
+<div style="flex:1">
+
+<b>${rec.name}</b><br>
+
+<span>${formatDuration(rec.duration)}</span><br>
+
+<small>${progressText}</small>
+
+</div>
+
+<button onclick="playVocalRecord('${rec.id}')">
+▶
+</button>
+
+<button onclick="renameVocalRecord('${rec.id}')">
+✏
+</button>
+
+<button onclick="enhanceVocalRecord('${rec.id}')">
+✨
+</button>
+
+<button onclick="addVocalToTimeline('${rec.id}')">
+➕
+</button>
+
+<button onclick="deleteVocalRecord('${rec.id}')">
+🗑
+</button>
+
+</div>
+
+`;
+
+    });
+
+}
+
+/* ===== TAMBAH SEMUA VOKAL KE TIMELINE ===== */
+function addAllVocalToTimeline(){
+
+    if(vocalRecords.length === 0){
+        alert("Belum ada rekaman vokal.");
+        return;
+    }
+
+    vocalRecords.forEach(function(rec){
+
+        if(typeof importedAudioTracks !== "undefined"){
+
+            importedAudioTracks.push({
+                id: rec.id + "_all",
+                name: rec.name,
+                fileName: rec.name + ".webm",
+                type: "vocal",
+                duration: rec.duration / 1000,
+                waveform: [],
+                offset: 0,
+                url: rec.url
+            });
+
+        }
+
+    });
+
+    if(typeof renderTimeline === "function"){
+        renderTimeline();
+    }
+
+    if(typeof updateImportList === "function"){
+        updateImportList();
+    }
+
+    alert("Semua rekaman vokal masuk ke Timeline.");
+
+}
