@@ -238,3 +238,302 @@ window.addEventListener("load", function () {
   const stopBtn = document.getElementById("vocalStopBtn");
   if (stopBtn) stopBtn.innerHTML = "⏹ Stop";
 });
+/* =========================================
+   VOCAL.JS PRO - TAHAP 2
+   Playback & Record Manager
+========================================= */
+
+/* ===== PLAY TERAKHIR ===== */
+function playLastVocal(){
+
+    if(vocalRecords.length===0){
+        alert("Belum ada rekaman.");
+        return;
+    }
+
+    const rec=vocalRecords[vocalRecords.length-1];
+    const audio=new Audio(rec.url);
+
+    audio.volume=1;
+    audio.play();
+
+}
+
+/* ===== PLAY BERDASARKAN ID ===== */
+function playVocalRecord(id){
+
+    const rec=vocalRecords.find(r=>r.id===id);
+
+    if(!rec)return;
+
+    const audio=new Audio(rec.url);
+
+    audio.volume=1;
+    audio.play();
+
+}
+
+/* ===== HAPUS ===== */
+function deleteVocalRecord(id){
+
+    const rec=vocalRecords.find(r=>r.id===id);
+
+    if(!rec)return;
+
+    URL.revokeObjectURL(rec.url);
+
+    vocalRecords=vocalRecords.filter(r=>r.id!==id);
+
+    updateVocalList();
+
+}
+
+/* ===== RENAME ===== */
+function renameVocalRecord(id){
+
+    const rec=vocalRecords.find(r=>r.id===id);
+
+    if(!rec)return;
+
+    const name=prompt("Nama Rekaman",rec.name);
+
+    if(!name)return;
+
+    rec.name=name;
+
+    updateVocalList();
+
+}
+
+/* ===== FORMAT DURASI ===== */
+function formatDuration(ms){
+
+    let sec=Math.floor(ms/1000);
+
+    let m=Math.floor(sec/60);
+
+    let s=sec%60;
+
+    if(m<10)m="0"+m;
+    if(s<10)s="0"+s;
+
+    return m+":"+s;
+
+}
+
+/* ===== UPDATE LIST ===== */
+function updateVocalList(){
+
+    const box=document.getElementById("vocalList");
+
+    if(!box)return;
+
+    if(vocalRecords.length===0){
+
+        box.innerHTML="Belum ada rekaman.";
+
+        return;
+
+    }
+
+    box.innerHTML="";
+
+    vocalRecords.forEach(function(rec,index){
+
+        box.innerHTML+=`
+
+<div class="record-item">
+
+<div style="flex:1">
+
+<b>${rec.name}</b><br>
+
+<span>${formatDuration(rec.duration)}</span>
+
+</div>
+
+<button onclick="playVocalRecord('${rec.id}')">
+▶
+</button>
+
+<button onclick="renameVocalRecord('${rec.id}')">
+✏
+</button>
+
+<button onclick="deleteVocalRecord('${rec.id}')">
+🗑
+</button>
+
+</div>
+
+`;
+
+    });
+
+}
+
+/* =========================================
+   VOCAL.JS PRO - TAHAP 3
+   Vocal FX Engine
+   Noise / Smooth / Focus
+========================================= */
+
+let vocalNoiseEnabled = false;
+let vocalSmoothEnabled = false;
+let vocalFocusEnabled = false;
+
+/* ===== TOGGLE NOISE ===== */
+function toggleNoiseClean(){
+
+    vocalNoiseEnabled = !vocalNoiseEnabled;
+
+    const btn = document.getElementById("noiseBtn");
+
+    if(btn){
+        btn.innerHTML = vocalNoiseEnabled
+        ? "🧹 Bersihkan Noise ON"
+        : "🧹 Bersihkan Noise OFF";
+    }
+
+}
+
+/* ===== TOGGLE SMOOTH ===== */
+function toggleVocalSmooth(){
+
+    vocalSmoothEnabled = !vocalSmoothEnabled;
+
+    const btn = document.getElementById("smoothBtn");
+
+    if(btn){
+        btn.innerHTML = vocalSmoothEnabled
+        ? "✨ Perhalus Vokal ON"
+        : "✨ Perhalus Vokal OFF";
+    }
+
+}
+
+/* ===== TOGGLE FOCUS ===== */
+function toggleVocalFocus(){
+
+    vocalFocusEnabled = !vocalFocusEnabled;
+
+    const btn = document.getElementById("focusBtn");
+
+    if(btn){
+        btn.innerHTML = vocalFocusEnabled
+        ? "🎯 Focus Vokal ON"
+        : "🎯 Focus Vokal OFF";
+    }
+
+}
+
+/* ===== PROSES PERHALUS ===== */
+function enhanceVocalRecord(id){
+
+    const rec = vocalRecords.find(r => r.id === id);
+
+    if(!rec){
+        alert("Rekaman tidak ditemukan.");
+        return;
+    }
+
+    rec.progress = 10;
+    rec.processed = false;
+
+    updateVocalList();
+
+    const steps = [20,30,40,50,60,70,80,90,100];
+    let i = 0;
+
+    const timer = setInterval(function(){
+
+        rec.progress = steps[i];
+
+        if(rec.progress >= 100){
+
+            clearInterval(timer);
+
+            rec.processed = true;
+            rec.progress = 100;
+
+            updateVocalList();
+
+            alert("Perhalus vokal selesai.");
+
+            return;
+        }
+
+        updateVocalList();
+
+        i++;
+
+    }, 250);
+
+}
+
+/* ===== UPDATE LIST VERSI FX ===== */
+/* Menimpa updateVocalList dari Tahap 2 agar ada tombol Perhalus */
+function updateVocalList(){
+
+    const box = document.getElementById("vocalList");
+
+    if(!box)return;
+
+    if(vocalRecords.length === 0){
+
+        box.innerHTML = "Belum ada rekaman.";
+
+        return;
+
+    }
+
+    box.innerHTML = "";
+
+    vocalRecords.forEach(function(rec,index){
+
+        let progressText = "";
+
+        if(rec.processed){
+            progressText = "✅ Sukses";
+        }else if(rec.progress && rec.progress > 0){
+            progressText = "Memperhalus proses " + rec.progress + "%";
+        }else{
+            progressText = "Belum diproses";
+        }
+
+        box.innerHTML += `
+
+<div class="record-item">
+
+<div style="flex:1">
+
+<b>${rec.name}</b><br>
+
+<span>${formatDuration(rec.duration)}</span><br>
+
+<small>${progressText}</small>
+
+</div>
+
+<button onclick="playVocalRecord('${rec.id}')">
+▶
+</button>
+
+<button onclick="renameVocalRecord('${rec.id}')">
+✏
+</button>
+
+<button onclick="enhanceVocalRecord('${rec.id}')">
+✨
+</button>
+
+<button onclick="deleteVocalRecord('${rec.id}')">
+🗑
+</button>
+
+</div>
+
+`;
+
+    });
+}
