@@ -16,34 +16,91 @@
 </div>
 <div id="panelBackdrop" class="panel-backdrop" onclick="closeAllPanels()"></div>
 <section class="panel import-panel" id="importPanel">
-  <div class="panel-head">
-    <div>
-      <h2>📥 Import Audio</h2>
-      <p>Import MP3/WAV ke Editor Musik</p>
+
+    <div class="panel-head">
+
+        <div>
+            <h2>📥 Import Audio V4.5</h2>
+            <p>Import MP3/WAV ke Editor Musik</p>
+        </div>
+
+        <button class="close-btn"
+        onclick="closePanel('importPanel')">
+            ×
+        </button>
+
     </div>
-    <button class="close-btn" onclick="closePanel('importPanel')">×</button>
-  </div>
 
-  <div class="import-actions">
-    <button onclick="openImportPicker()">📂 Import MP3/WAV</button>
-    <input type="file" id="importInput" accept="audio/*,.mp3,.wav" hidden>
-  </div>
+    <div class="import-status-box">
 
-  <div class="import-info-box">
-    <b>Alur Import:</b>
-    <span>Pilih file → isi nama track → waveform muncul di Editor Musik</span>
-  </div>
+        <button onclick="openImportPicker()">
+            📂 Import MP3 / WAV
+        </button>
 
-  <div class="record-head import-head-inside">
-    <div>
-      <h2>📦 List Import</h2>
-      <p>File audio yang sudah masuk</p>
+        <input
+            type="file"
+            id="importInput"
+            accept="audio/*,.mp3,.wav"
+            hidden>
+
+        <div id="importStatus">
+            🔴 Belum ada file diimport
+        </div>
+
+        <div id="importInfo">
+            File Import : 0
+        </div>
+
     </div>
-  </div>
 
-  <div class="import-list" id="importList">
-    <span class="empty-record">Belum ada file import</span>
-  </div>
+    <div class="import-option-box">
+
+        <button id="autoTrackBtn"
+        onclick="toggleAutoTrack()">
+            🎼 Auto Nama Track ON
+        </button>
+
+        <button id="autoWaveBtn"
+        onclick="toggleWaveform()">
+            🌊 Waveform ON
+        </button>
+
+    </div>
+
+    <div class="record-panel">
+
+        <h3>📋 List Import</h3>
+
+        <div id="importList">
+            Belum ada file import.
+        </div>
+
+    </div>
+
+    <div class="import-transport">
+
+        <button onclick="playImportAudio()">
+            ▶ Play
+        </button>
+
+        <button onclick="stopImportAudio()">
+            ⏹ Stop
+        </button>
+
+        <button onclick="renameImportAudio()">
+            ✏ Rename
+        </button>
+
+        <button onclick="deleteImportAudio()">
+            🗑 Hapus
+        </button>
+
+        <button onclick="addImportToTimeline()">
+            ➕ Tambah ke Timeline
+        </button>
+
+    </div>
+
 </section>
 
 <section class="panel drum-panel" id="drumPanel">
