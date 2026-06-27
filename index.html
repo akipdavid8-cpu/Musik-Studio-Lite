@@ -462,38 +462,68 @@ Belum ada rekaman.
 </section>
 
 
-
-
 <section class="panel midi-panel" id="midiPanel">
+
   <div class="panel-head">
     <div>
-      <h2>🎼 Panel MIDI</h2>
-      <p>Import MIDI, daftar MIDI, info, tambah ke Timeline, dan hapus</p>
+      <h2>🎼 MIDI Panel V4.5</h2>
+      <p>Tulis nada/chord, atur BPM, marker, lalu tambah ke Editor Musik</p>
     </div>
     <button class="close-btn" onclick="closePanel('midiPanel')">×</button>
   </div>
 
-  <div class="import-actions">
-    <button onclick="openMidiImportPicker()">📂 Import MIDI</button>
-    <input type="file" id="midiImportInput" accept=".mid,.midi,audio/midi" hidden>
-  </div>
+  <div class="midi-input-box">
+    <h3>✍️ Tulis Nada / Chord</h3>
+    <p>Contoh: C G F A | C Am F G | Dm G C</p>
 
-  <div class="import-info-box">
-    <b>Alur MIDI:</b>
-    <span>Pilih file .mid/.midi dari HP → masuk Daftar MIDI → Info → Tambah ke Timeline Track MIDI</span>
-  </div>
+    <textarea id="midiTextInput" placeholder="C G F A"></textarea>
 
-  <div class="record-head import-head-inside">
-    <div>
-      <h2>📋 Daftar MIDI</h2>
-      <p>File MIDI yang sudah diimport</p>
+    <div class="midi-actions">
+      <button onclick="createMidiFromText()">🎼 Buat MIDI</button>
+      <button onclick="clearMidiInput()">🗑 Clear Input</button>
     </div>
   </div>
 
-  <div class="midi-list" id="midiList">
-    <span class="empty-record">Belum ada MIDI</span>
+  <div class="midi-status-box">
+    <div id="midiStatus">🟢 Siap membuat MIDI dari teks.</div>
+    <div id="midiInfo">🎹 Menggunakan Asset Piano.</div>
   </div>
+
+  <div class="midi-bpm-box">
+    <h3>🎵 BPM</h3>
+    <button onclick="changeMidiBpm(-5)">-</button>
+    <strong id="midiBpmText">120</strong>
+    <button onclick="changeMidiBpm(5)">+</button>
+  </div>
+
+  <div class="midi-marker-box">
+    <h3>📍 Marker</h3>
+    <button onclick="setMidiMarker('Intro')">Intro</button>
+    <button onclick="setMidiMarker('Verse')">Verse</button>
+    <button onclick="setMidiMarker('Pre Chorus')">Pre Chorus</button>
+    <button onclick="setMidiMarker('Chorus')">Chorus</button>
+    <button onclick="setMidiMarker('Bridge')">Bridge</button>
+    <button onclick="setMidiMarker('Solo')">Solo</button>
+    <button onclick="setMidiMarker('Outro')">Outro</button>
+
+    <div id="midiMarkerText">Marker: Verse</div>
+  </div>
+
+  <div class="record-panel">
+    <h3>📋 List MIDI</h3>
+    <div id="midiList">Belum ada MIDI.</div>
+  </div>
+
+  <div class="midi-transport">
+    <button onclick="playMidiList()">▶ Play</button>
+    <button onclick="stopMidiPlay()">⏹ Stop</button>
+    <button onclick="clearMidiList()">🗑 Clear</button>
+    <button onclick="addMidiToTimeline()">➕ Tambah ke Timeline</button>
+  </div>
+
 </section>
+
+
 </div><input type="file" id="importInput" accept="audio/*,.mp3,.wav" hidden>
 
 <script>
