@@ -315,71 +315,152 @@ Belum ada rekaman.
     <div id="bassRecordList">Belum ada rekaman bass.</div>
   </div>
 </section>
-  
-<section class="panel timeline-panel" id="timelinePanel"><div class="panel-head"><div><h2>🎼 Editor Musik V2</h2><p>Jantung Musik Studio Lite: track, clip, pattern, dan persiapan export</p></div><div class="panel-actions"><button class="scroll-btn" onclick="scrollTimelineTop()">⬆</button><button class="close-btn" onclick="closePanel('timelinePanel')">×</button></div></div>
-<div class="timeline-controls">
-<button onclick="stopTimeline()">⏹ Stop</button>
-<button onclick="playTimeline()">▶ Play</button>
-<button id="recBtn" onclick="toggleMasterRecorder()">🔴 Rec</button>
-<button onclick="changeBpm(-5)">−</button>
-<strong id="bpmText">120 BPM</strong>
-<button onclick="changeBpm(5)">+</button>
-</div>
-<div class="page-nav"><button onclick="prevStepPage()">◀</button><strong id="pageText" title="Halaman Editor Musik">1/4</strong><button onclick="nextStepPage()">▶</button></div>
-<div class="note-editor-controls"><button onclick="deleteSelectedNote()">🗑 Note</button><button onclick="copySelectedNote()">📋 Note</button><button onclick="pasteSelectedNote()">📌 Note</button><button onclick="clearSelectedNote()">Batal Pilih</button></div>
-<div class="timeline-controls">
-<button onclick="cutSelectedAudio()">✂ Cut Audio</button>
-<button onclick="copySelectedAudio()">📋 Copy Audio</button>
-<button onclick="pasteAudio()">📌 Paste Audio</button>
-<button onclick="saveProject()">💾 Save</button>
-<button onclick="loadProjectClick()">📂 Load</button>
-<button onclick="clearTimeline()">🗑 Clear</button>
-</div>
-<div class="loop-area-box-v4">
-  <div class="loop-area-head-v4">
+
+    <section class="panel timeline-panel" id="timelinePanel">
+
+  <div class="panel-head">
     <div>
-      <h3>🔁 Loop Area</h3>
-      <p>Ulang bagian lagu dari titik A sampai B</p>
+      <h2>🎼 Editor Musik V4.5</h2>
+      <p>Tempat menyusun, mengedit, loop, dan simpan timeline lagu</p>
     </div>
-    <button onclick="toggleLoopAreaV4()" id="loopToggleBtnV4">Loop OFF</button>
+    <button class="close-btn" onclick="closePanel('timelinePanel')">×</button>
   </div>
 
-  <div class="loop-area-actions-v4">
+  <div class="editor-top-bar">
+    <div>
+      Timeline
+      <button onclick="prevStepPage()">◀</button>
+      <strong id="pageText">1/8</strong>
+      <button onclick="nextStepPage()">▶</button>
+    </div>
+
+    <div>
+      <button onclick="changeBpm(-5)">-</button>
+      <strong id="bpmText">120 BPM</strong>
+      <button onclick="changeBpm(5)">+</button>
+    </div>
+  </div>
+
+  <div class="song-section-bar">
+    <button>Intro<br><small>0:00</small></button>
+    <button>Verse<br><small>0:20</small></button>
+    <button>Chorus<br><small>0:50</small></button>
+    <button>Bridge<br><small>1:20</small></button>
+    <button>Solo<br><small>1:40</small></button>
+    <button>Outro<br><small>2:10</small></button>
+    <button onclick="addSongSection()">＋</button>
+  </div>
+
+  <div class="loop-area-box-v45">
+    <strong>🔁 Loop Area</strong>
+
+    <button id="loopToggleBtnV4" onclick="toggleLoopAreaV4()">Loop OFF</button>
     <button onclick="setLoopStartV4()">🅰 Set A</button>
     <button onclick="setLoopEndV4()">🅱 Set B</button>
     <button onclick="playLoopAreaV4()">▶ Play Loop</button>
-    <button onclick="clearLoopAreaV4()">🗑 Clear Loop</button>
-  </div>
+    <button onclick="clearLoopAreaV4()">🗑 Clear</button>
 
-  <div class="loop-area-status-v4" id="loopAreaStatusV4">
-    Loop: OFF • A: 1 • B: 16
-  </div>
-</div>
-
-<div class="timeline-time" id="timeDisplay">Waktu: 00:00.00</div>
-<div class="add-track-box"><input id="newTrackTitle" placeholder="Judul track baru"><button onclick="addCustomTrack()">➕ Tambah Track</button></div>
-<div class="timeline-record-box">
-  <div class="timeline-record-head">
-    <div>
-      <h3>📋 List Rekam Timeline</h3>
-      <p>Simpan susunan Editor Musik sebelum masuk Export</p>
+    <div id="loopAreaStatusV4">
+      Loop: OFF • A: 0:00 • B: 0:20
     </div>
-    <button onclick="saveTimelineRecordV4()">💾 Simpan Timeline</button>
   </div>
-  <div class="timeline-record-list" id="timelineRecordListV4">
-    <span class="empty-record">Belum ada rekam timeline</span>
-  </div>
-</div>
 
-<div class="timeline-scroll" id="timelineScroll">
-  <div class="playhead-line" id="playheadLine"></div>
-<div class="audio-tracks" id="audioTracks"></div>
-  <div class="step-header" id="stepHeader"></div>
-  <div class="timeline-side-nav"><button onclick="prevStepPage()">◀</button><span id="pageTextBottom">1/4</span><button onclick="nextStepPage()">▶</button></div>
-  <div class="timeline-tracks" id="timelineTracks"></div>
-</div>
-<button class="scroll-bottom-btn" onclick="scrollTimelineBottom()">⬇</button>
-<input type="file" id="loadProjectInput" accept=".json" hidden>
+  <div class="editor-transport">
+    <button onclick="playTimeline()">▶ Play</button>
+    <button onclick="pauseTimeline()">⏸ Pause</button>
+    <button onclick="stopTimeline()">⏹ Stop</button>
+    <button id="recBtn" onclick="toggleMasterRecorder()">🔴 Rec</button>
+    <button onclick="undoEditor()">↶ Undo</button>
+    <button onclick="redoEditor()">↷ Redo</button>
+  </div>
+
+  <div class="timeline-scroll" id="timelineScroll">
+
+    <div class="playhead-line" id="playheadLine"></div>
+
+    <div class="timeline-track-row">
+      <div class="track-name">🎤 Vocal</div>
+      <div class="track-lane" data-track="vocal"></div>
+    </div>
+
+    <div class="timeline-track-row">
+      <div class="track-name">🎹 Piano</div>
+      <div class="track-lane" data-track="piano"></div>
+    </div>
+
+    <div class="timeline-track-row">
+      <div class="track-name">🎸 Guitar</div>
+      <div class="track-lane" data-track="guitar"></div>
+    </div>
+
+    <div class="timeline-track-row">
+      <div class="track-name">🎸 Bass</div>
+      <div class="track-lane" data-track="bass"></div>
+    </div>
+
+    <div class="timeline-track-row">
+      <div class="track-name">🥁 Drum</div>
+      <div class="track-lane" data-track="drum"></div>
+    </div>
+
+    <div class="timeline-track-row">
+      <div class="track-name">✨ FX</div>
+      <div class="track-lane" data-track="fx"></div>
+    </div>
+
+    <div class="timeline-track-row">
+      <div class="track-name">🎼 MIDI</div>
+      <div class="track-lane" data-track="midi"></div>
+    </div>
+
+    <div class="timeline-track-row">
+      <div class="track-name">📥 Import</div>
+      <div class="track-lane" data-track="import"></div>
+    </div>
+
+  </div>
+
+  <div class="editor-tool-tabs">
+    <button onclick="openEditorTool('clip')">🎵 Clip</button>
+    <button onclick="openEditorTool('track')">🎼 Track</button>
+    <button onclick="openEditorTool('pattern')">📋 Pattern</button>
+    <button onclick="openEditorTool('timeline')">📄 Timeline</button>
+    <button onclick="openEditorTool('status')">📊 Status</button>
+  </div>
+
+  <div class="editor-tool-panel" id="editorToolPanel" style="display:none;">
+
+    <div class="editor-tool-head">
+      <strong id="editorToolTitle">Tool</strong>
+      <button onclick="closeEditorTool()">❌</button>
+    </div>
+
+    <div class="editor-tool-content" id="editorToolContent">
+      Pilih tool.
+    </div>
+
+  </div>
+
+  <div class="timeline-time" id="timeDisplay">
+    Waktu: 00:00.00
+  </div>
+
+  <div class="timeline-record-box">
+    <div class="timeline-record-head">
+      <div>
+        <h3>📋 List Rekam Timeline</h3>
+        <p>Hasil susunan lagu yang siap dipindahkan ke Export</p>
+      </div>
+      <button onclick="saveTimelineRecordV4()">💾 Simpan Timeline</button>
+    </div>
+
+    <div class="timeline-record-list" id="timelineRecordListV4">
+      <span class="empty-record">Belum ada rekam timeline</span>
+    </div>
+  </div>
+
+  <input type="file" id="loadProjectInput" accept=".json" hidden>
+
 </section>
 
 <section class="panel export-panel" id="exportPanel">
