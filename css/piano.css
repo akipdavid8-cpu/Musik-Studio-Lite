@@ -1,0 +1,117 @@
+/* =========================================
+   PIANO.CSS V4.5
+========================================= */
+
+.piano-panel{
+  background:#130d22;
+}
+
+.piano-asset-box-v45,
+.piano-record-box-v45{
+  background:#0f0a1c;
+  border:1px solid rgba(139,92,246,.55);
+  border-radius:16px;
+  padding:12px;
+  margin:12px 0;
+}
+
+.piano-asset-box-v45 button,
+.piano-controls-v45 button,
+.piano-bank-nav-v45 button{
+  border:none;
+  border-radius:12px;
+  padding:10px 12px;
+  background:#2b1b46;
+  color:#fff;
+  font-weight:900;
+  border:1px solid rgba(139,92,246,.85);
+}
+
+.piano-asset-box-v45 button{
+  width:100%;
+  padding:14px;
+}
+
+.piano-status-v45{
+  margin-top:10px;
+  border-radius:12px;
+  padding:10px;
+  font-weight:900;
+  font-size:13px;
+  border:1px solid rgba(139,92,246,.55);
+}
+
+.piano-status-v45.success{
+  color:#4ade80;
+  border-color:#4ade80;
+  background:rgba(74,222,128,.08);
+}
+
+.piano-status-v45.fail{
+  color:#f87171;
+  border-color:#ef4444;
+  background:rgba(239,68,68,.08);
+}
+
+.piano-status-v45.loading{
+  color:#facc15;
+  border-color:#facc15;
+  background:rgba(250,204,21,.08);
+}
+
+.piano-info-v45{
+  margin-top:8px;
+  color:#c4b5fd;
+  font-size:12px;
+  font-weight:800;
+}
+
+.piano-controls-v45{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin:12px 0;
+}
+
+.piano-controls-v45 button.recording,
+#pianoRecordBtnV45.recording{
+  border-color:#4ade80;
+  color:#bbf7d0;
+  box-shadow:0 0 14px rgba(74,222,128,.45);
+}
+
+.piano-bank-nav-v45{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:12px 0;
+  background:#0f0a1c;
+  border:1px solid rgba(139,92,246,.45);
+  border-radius:14px;
+  padding:10px;
+}
+
+.piano-bank-nav-v45 strong{
+  color:#4ade80;
+  min-width:90px;
+  text-align:center;
+}
+
+.piano-grid,
+.piano-72-grid-v45{
+  grid-template-columns:repeat(4,1fr);
+}
+
+.piano-pad{
+  min-height:62px;
+  font-size:13px;
+}
+
+.piano-record-list-v45{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  max-height:150px;
+  overflow-y:auto;
+}
