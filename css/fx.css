@@ -1,0 +1,131 @@
+/* =========================================
+   FX.CSS V4.5
+========================================= */
+
+.fx-panel{
+  background:#130d22;
+}
+
+.fx-status-box,
+.fx-effect-box,
+.fx-user-tools{
+  background:#0f0a1c;
+  border:1px solid rgba(139,92,246,.55);
+  border-radius:16px;
+  padding:12px;
+  margin:12px 0;
+}
+
+.fx-status-box > button,
+.fx-controls button,
+.fx-effect-box button,
+.fx-bank-nav button,
+.fx-user-tools button{
+  border:none;
+  border-radius:12px;
+  padding:10px 12px;
+  background:#2b1b46;
+  color:#fff;
+  font-weight:900;
+  border:1px solid rgba(139,92,246,.8);
+}
+
+.fx-status-box > button{
+  width:100%;
+  padding:14px;
+}
+
+#fxStatus{
+  margin-top:10px;
+  background:#120c20;
+  border:1px solid rgba(239,68,68,.45);
+  color:#f87171;
+  border-radius:12px;
+  padding:10px;
+  font-weight:900;
+  font-size:13px;
+}
+
+#fxInfo,
+#fxImportStatus,
+#fxBankMessage{
+  margin-top:8px;
+  color:#c4b5fd;
+  font-size:12px;
+  font-weight:800;
+}
+
+.fx-controls,
+.fx-effect-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
+}
+
+#fxRecordBtn{
+  border-color:#4ade80;
+}
+
+.fx-effect-box button{
+  border-color:#facc15;
+}
+
+.fx-bank-nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  background:#0f0a1c;
+  border:1px solid rgba(139,92,246,.55);
+  border-radius:16px;
+  padding:10px;
+  margin:12px 0;
+}
+
+#fxBankTitle{
+  color:#4ade80;
+  min-width:150px;
+  text-align:center;
+}
+
+.fx-grid{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.fx-grid .pad,
+.fx-pad{
+  min-height:62px;
+  font-size:13px;
+  background:linear-gradient(145deg,#10243b,#1c1230);
+}
+
+.fx-grid .pad:active,
+.fx-pad:active,
+.fx-pad.hit{
+  border-color:#38bdf8;
+  box-shadow:0 0 18px rgba(56,189,248,.45);
+}
+
+#fxRecordList{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-height:180px;
+  overflow-y:auto;
+}
+
+.fx-record-item{
+  background:#24163c;
+  border:1px solid rgba(139,92,246,.8);
+  border-radius:14px;
+  padding:10px;
+  font-weight:900;
+}
+
+.fx-record-item small{
+  display:block;
+  color:#c4b5fd;
+  font-size:12px;
+  margin-top:4px;
+}
