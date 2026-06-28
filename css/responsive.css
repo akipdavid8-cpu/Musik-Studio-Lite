@@ -1,0 +1,186 @@
+/* =========================================
+   RESPONSIVE.CSS V4.5
+========================================= */
+
+@media (max-width:480px){
+
+  .app{
+    max-width:100%;
+    padding:24px 14px;
+  }
+
+  header h1{
+    font-size:26px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+
+  .tile{
+    border-radius:16px;
+  }
+
+  .tile .icon{
+    font-size:34px;
+  }
+
+  .tile .label{
+    font-size:13px;
+  }
+
+  .panel.show{
+    top:56px;
+    left:6px;
+    right:6px;
+    bottom:8px;
+    border-radius:18px;
+    padding:12px;
+  }
+
+  .panel-head h2{
+    font-size:19px;
+  }
+
+  .panel-head p{
+    font-size:12px;
+  }
+
+  .close-btn{
+    width:38px;
+    height:38px;
+    font-size:26px;
+  }
+
+  .pad-grid,
+  .drum-grid,
+  .piano-grid,
+  .guitar-grid,
+  .bass-grid,
+  .fx-grid{
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+
+  .pad,
+  .drum-pad,
+  .piano-pad,
+  .guitar-pad,
+  .bass-pad,
+  .fx-pad{
+    min-height:56px;
+    font-size:12px;
+    border-radius:12px;
+  }
+
+  .import-option-box,
+  .import-transport,
+  .export-format-box,
+  .project-tools-v45,
+  .vocal-controls,
+  .vocal-effect-box,
+  .fx-controls,
+  .fx-effect-box{
+    grid-template-columns:1fr;
+  }
+
+  .editor-top-bar{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .editor-top-bar > div{
+    justify-content:space-between;
+  }
+
+  .editor-tool-tabs{
+    grid-template-columns:repeat(5, minmax(72px,1fr));
+    overflow-x:auto;
+  }
+
+  .editor-tool-tabs button{
+    white-space:nowrap;
+  }
+
+  .tool-button-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .timeline-track-row{
+    grid-template-columns:76px 1fr;
+    min-width:680px;
+  }
+
+  .track-name{
+    font-size:12px;
+    min-height:50px;
+  }
+
+  .track-lane{
+    min-height:50px;
+  }
+
+  .editor-clip{
+    height:38px;
+  }
+
+  .timeline-scroll{
+    min-height:390px;
+  }
+
+  .timeline-record-head,
+  .export-head{
+    flex-direction:column;
+  }
+
+  .export-setting-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+}
+
+@media (orientation:landscape){
+
+  .app{
+    max-width:100%;
+    padding:16px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(6,1fr);
+  }
+
+  .tile{
+    aspect-ratio:1/1;
+  }
+
+  .panel.show{
+    top:12px;
+    bottom:12px;
+    left:12px;
+    right:12px;
+  }
+
+  .timeline-scroll{
+    min-height:320px;
+  }
+}
+
+@media (min-width:700px){
+
+  .app{
+    max-width:720px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .panel.show{
+    left:50%;
+    right:auto;
+    width:680px;
+    transform:translateX(-50%);
+  }
+}
