@@ -784,25 +784,57 @@ Belum ada rekaman.
 </div>
 
 <section class="panel" id="projectPanel">
+
 <div class="panel-head">
-<div><h2>📁 Project</h2><p>Save, Load, dan Clear Project</p></div>
-<button class="close-btn" onclick="closePanel('projectPanel')">×</button>
+<div>
+<h2>📁 Project</h2>
+<p>Save, Load, dan Clear Project</p>
 </div>
+
+<button class="close-btn"
+onclick="closePanel('projectPanel')">×</button>
+</div>
+
 <div class="project-actions-v45">
 <button onclick="saveProject()">💾 Save Project</button>
 <button onclick="loadProjectClick()">📂 Load Project</button>
 <button onclick="clearTimeline()">🗑 Clear Project</button>
 </div>
-</section>
 
 <div class="project-v4-box">
+
 <h3>📁 Folder Project</h3>
-<button onclick="createProjectV4()">➕ Buat Project</button>
+
+<button onclick="createProjectV4()">
+➕ Buat Project
+</button>
+
 <div id="projectListV4" class="project-list-v4">
-<span class="empty-record">Belum ada project</span>
-</div>
+<span class="empty-record">
+Belum ada project
+</span>
 </div>
 
+</div>
+
+<div id="projectStatusV45">
+Belum ada project aktif.
+</div>
+
+<div class="project-tools-v45">
+
+<button onclick="toggleProjectAutoSaveV45()">
+💾 Auto Save ON/OFF
+</button>
+
+<button onclick="restoreProjectBackupV45()">
+♻ Restore Backup
+</button>
+
+</div>
+
+</section>
+    
 <div id="masterCompatHiddenV45" class="master-compat-hidden-v45" aria-hidden="true">
   <span id="masterVolumeText">95%</span>
   <span id="masterMeterText">0%</span>
