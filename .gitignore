@@ -1,34 +1,83 @@
-# Gradle files
-.gradle/
-build/
+# =========================================
+# MUSIK STUDIO LITE V4.5
+# .gitignore
+# =========================================
 
-# Local configuration file (sdk path, etc)
-local.properties
+# ---------- Sistem Operasi ----------
 
-# Log/OS Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ---------- Editor ----------
+
+.vscode/
+.idea/
+
+# ---------- Log ----------
+
 *.log
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.aab
-*.apk
-output-metadata.json
+# ---------- Cache ----------
 
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+.cache/
+.tmp/
+temp/
+tmp/
 
-# Keystore files
-*.jks
-*.keystore
+# ---------- Backup ----------
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
+*.bak
+*.old
+*.backup
 
-# Android Profiling
-*.hprof
+# ---------- Node.js ----------
+
+node_modules/
+npm-debug.log*
+
+# ---------- Python ----------
+
+__pycache__/
+*.pyc
+
+# ---------- Build Android ----------
+
+build/
+dist/
+bin/
+
+# ---------- File Sementara ----------
+
+*.swp
+*.swo
+*.orig
+
+# ---------- ZIP Export ----------
+
+*.zip
+
+# ---------- Audio Export ----------
+
+exports/
+record/
+temp_audio/
+
+# ---------- Project Backup ----------
+
+backup/
+autosave/
+
+# ---------- Jangan Abaikan File Penting ----------
+
+!index.html
+!script.js
+!style.css
+!lame.min.js
+!README.md
+
+# ---------- Jangan Abaikan Folder Penting ----------
+
+!assets/
+!css/
+!js/
