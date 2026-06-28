@@ -1,0 +1,83 @@
+/* =========================================
+   DRUM.CSS V4.5
+========================================= */
+
+.drum-panel{
+  background:#130d22;
+}
+
+.drum-status-box{
+  background:#0f0a1c;
+  border:1px solid rgba(139,92,246,.55);
+  border-radius:16px;
+  padding:12px;
+  margin-bottom:14px;
+}
+
+.drum-status-box > button,
+.drum-controls button{
+  border:none;
+  border-radius:12px;
+  padding:10px 12px;
+  background:#2b1b46;
+  color:#fff;
+  font-weight:900;
+  border:1px solid rgba(139,92,246,.8);
+}
+
+.drum-status-box > button{
+  width:100%;
+  padding:14px;
+  margin-bottom:10px;
+}
+
+#drumStatus{
+  background:#120c20;
+  border:1px solid rgba(239,68,68,.45);
+  color:#f87171;
+  border-radius:12px;
+  padding:10px;
+  font-weight:900;
+  font-size:13px;
+  margin-bottom:10px;
+}
+
+.drum-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.drum-controls button:first-child{
+  border-color:#4ade80;
+}
+
+.drum-controls button:last-child{
+  grid-column:1 / -1;
+  border-color:#facc15;
+}
+
+.drum-grid{
+  grid-template-columns:repeat(4,1fr);
+}
+
+.drum-pad{
+  min-height:62px;
+  font-size:13px;
+  background:linear-gradient(145deg,#3b1020,#1c1230);
+}
+
+.drum-pad:active,
+.drum-pad.hit{
+  border-color:#4ade80;
+  box-shadow:0 0 18px rgba(74,222,128,.55);
+}
+
+#drumRecordList{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  max-height:150px;
+  overflow-y:auto;
+}
