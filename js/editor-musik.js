@@ -2114,3 +2114,377 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, 100);
 });
+/* =========================================
+   EDITOR MUSIK V4.5 - TAHAP 6
+   Timeline Page System 8 Menit
+========================================= */
+
+/* ===== PAGE CONFIG ===== */
+
+editorPage = editorPage || 1;
+editorTotalPage = editorTotalPage || 8;
+
+let editorPageDurationV45 = 60; // 1 halaman = 60 detik
+let editorMaxDurationV45 = editorTotalPage * editorPageDurationV45;
+
+/* ===== GET PAGE TIME ===== */
+
+function getEditorPageStartTimeV45() {
+    return (editorPage - 1) * editorPageDurationV45;
+}
+
+function getEditorPageEndTimeV45() {
+    return editorPage * editorPageDurationV45;
+}
+
+/* ===== UPDATE PAGE TEXT ===== */
+
+function updateEditorPageText() {
+    const pageText = document.getElementById("pageText");
+
+    if (pageText) {
+        pageText.innerHTML = editorPage + "/" + editorTotalPage;
+    }
+}
+
+/* ===== PAGE BUTTON ===== */
+
+function prevStepPage() {
+    if (editorPage > 1) {
+        editorPage--;
+    }
+
+    renderEditorTimeline();
+    updateEditorPageText();
+    updatePlayheadLine();
+}
+
+function nextStepPage() {
+    if (editorPage < editorTotalPage) {
+        editorPage++;
+    }
+
+    renderEditorTimeline();
+    updateEditorPageText();
+    updatePlayheadLine();
+}
+
+/* ===== GO TO PAGE BY TIME ===== */
+
+function setEditorPageByTimeV45(time) {
+    let page = Math.floor(time / editorPageDurationV45) + 1;
+
+    if (page < 1) page = 1;
+    if (page > editorTotalPage) page = editorTotalPage;
+
+    if (page !== editorPage) {
+        editorPage = page;
+        updateEditorPageText();
+        renderEditorTimeline();
+    }
+}
+
+/* ===== RENDER TIMELINE PER PAGE ===== */
+
+function renderEditorTimeline() {
+    renderEditorTracks();
+    renderEditorClipsByPageV45();
+    updatePlayheadLine();
+}
+
+function renderEditorClipsByPageV45() {
+    const pageStart = getEditorPageStartTimeV45();
+    const pageEnd = getEditorPageEndTimeV45();
+
+    editorClips.forEach(function (clip) {
+        const clipStart = Number(clip.start || 0);
+        const clipDuration = Number(clip.duration || 1);
+        const clipEnd = clipStart + clipDuration;
+
+        if (clipEnd <= pageStart || clipStart >= pageEnd) {
+            return;
+        }
+
+        const lane = document.querySelector(
+            `.track-lane[data-track="${clip.trackId}"]`
+        );
+
+        if (!lane) return;
+
+        const visibleStart = Math.max(clipStart, pageStart);
+        const visibleEnd = Math.min(clipEnd, pageEnd);
+
+        const localStart = visibleStart - pageStart;
+        const visibleDuration = visibleEnd - visibleStart;
+
+        const clipEl = document.createElement("div");
+        clipEl.className = "editor-clip";
+
+        if (clip.id === selectedEditorClipId) {
+            clipEl.classList.add("selected");
+        }
+
+        clipEl.dataset.clipId = clip.id;
+        clipEl.dataset.trackId = clip.trackId;
+
+        clipEl.style.left = timeToPixel(localStart) + "px";
+        clipEl.style.width = Math.max(40, timeToPixel(visibleDuration)) + "px";
+
+        if (clip.color) {
+            clipEl.style.background = clip.color;
+        }
+
+        clipEl.innerHTML = `
+            <div class="editor-clip-name">${clip.name}</div>
+            <div class="editor-clip-wave">${getClipVisual(clip)}</div>
+        `;
+
+        clipEl.onclick = function (e) {
+            e.stopPropagation();
+            selectEditorClip(clip.id);
+        };
+
+        clipEl.onpointerdown = function (e) {
+            if (typeof startDragEditorClip === "function") {
+                startDragEditorClip(e, clip.id);
+            }
+        };
+
+        lane.appendChild(clipEl);
+    });
+}
+
+/* ===== UPDATE PLAYHEAD PER PAGE ===== */
+
+function updatePlayheadLine() {
+    const playhead = document.getElementById("playheadLine");
+    if (!playhead) return;
+
+    const pageStart = getEditorPageStartTimeV45();
+    const pageEnd = getEditorPageEndTimeV45();
+
+    if (editorPlayheadTime < pageStart || editorPlayheadTime >= pageEnd) {
+        playhead.style.display = "none";
+        return;
+    }
+
+    playhead.style.display = "block";
+
+    const localTime = editorPlayheadTime - pageStart;
+    playhead.style.left = timeToPixel(localTime) + "px";
+}
+
+/* ===== PLAY TIMELINE FINAL ===== */
+
+function playTimeline() {
+    if (editorIsPlaying) return;
+
+    editorIsPlaying = true;
+
+    const startRealTime = Date.now();
+    const startPlayhead = editorPlayheadTime;
+
+    if (editorPlayTimer) {
+        clearInterval(editorPlayTimer);
+    }
+
+    editorPlayTimer = setInterval(function () {
+        const elapsed = (Date.now() - startRealTime) / 1000;
+        editorPlayheadTime = startPlayhead + elapsed;
+
+        if (loopAreaEnabledV4 && editorPlayheadTime >= loopEndTimeV4) {
+            editorPlayheadTime = loopStartTimeV4;
+        }
+
+        if (editorPlayheadTime >= editorMaxDurationV45) {
+            stopTimeline();
+            return;
+        }
+
+        setEditorPageByTimeV45(editorPlayheadTime);
+        updatePlayheadLine();
+        updateTimeDisplay();
+
+        if (!loopAreaEnabledV4) {
+            const maxTime = getEditorSongDuration();
+
+            if (editorPlayheadTime >= maxTime && maxTime > 0) {
+                stopTimeline();
+            }
+        }
+
+    }, 30);
+}
+
+/* ===== PAUSE FINAL ===== */
+
+function pauseTimeline() {
+    editorIsPlaying = false;
+
+    if (editorPlayTimer) {
+        clearInterval(editorPlayTimer);
+        editorPlayTimer = null;
+    }
+}
+
+/* ===== STOP FINAL ===== */
+
+function stopTimeline() {
+    editorIsPlaying = false;
+    editorPlayheadTime = 0;
+    editorPage = 1;
+
+    if (editorPlayTimer) {
+        clearInterval(editorPlayTimer);
+        editorPlayTimer = null;
+    }
+
+    renderEditorTimeline();
+    updateEditorPageText();
+    updatePlayheadLine();
+    updateTimeDisplay();
+}
+
+/* ===== MOVE CLIP FIX PAGE-AWARE ===== */
+
+function startDragEditorClip(e, clipId) {
+    const clip = editorClips.find(c => c.id === clipId);
+    if (!clip || clip.locked) return;
+
+    isDraggingClip = true;
+    dragClipId = clipId;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    dragOriginalStart = clip.start;
+    dragOriginalTrack = clip.trackId;
+
+    selectedEditorClipId = clipId;
+
+    document.onpointermove = dragEditorClipMove;
+    document.onpointerup = stopDragEditorClip;
+
+    e.preventDefault();
+}
+
+function dragEditorClipMove(e) {
+    if (!isDraggingClip || !dragClipId) return;
+
+    const clip = editorClips.find(c => c.id === dragClipId);
+    if (!clip) return;
+
+    const deltaX = e.clientX - dragStartX;
+    const pageStart = getEditorPageStartTimeV45();
+    const timeMove = pixelToTime(deltaX);
+
+    clip.start = Math.max(0, dragOriginalStart + timeMove);
+
+    if (clip.start > editorMaxDurationV45 - 1) {
+        clip.start = editorMaxDurationV45 - 1;
+    }
+
+    const newTrack = detectTrackByY(e.clientY);
+    if (newTrack) {
+        clip.trackId = newTrack;
+    }
+
+    renderEditorTimeline();
+    updateEditorInfo();
+}
+
+/* ===== ADD CLIP PAGE-AWARE ===== */
+
+const oldAddClipToTimelineV45 = addClipToTimeline;
+
+addClipToTimeline = function (clipData) {
+    if (!clipData) return;
+
+    if (typeof clipData.start === "undefined") {
+        clipData.start = editorPlayheadTime || getEditorPageStartTimeV45();
+    }
+
+    const clip = oldAddClipToTimelineV45(clipData);
+
+    if (clip && typeof clip.start === "number") {
+        setEditorPageByTimeV45(clip.start);
+    }
+
+    renderEditorTimeline();
+    updateEditorPageText();
+
+    return clip;
+};
+
+/* ===== SONG SECTION PAGE-AWARE ===== */
+
+const oldSetSongSectionV45 = setSongSection;
+
+setSongSection = function (name) {
+    oldSetSongSectionV45(name);
+    setEditorPageByTimeV45(editorPlayheadTime);
+    updatePlayheadLine();
+};
+
+/* ===== INIT TAHAP 6 ===== */
+
+document.addEventListener("DOMContentLoaded", function () {
+    updateEditorPageText();
+    renderEditorTimeline();
+    updatePlayheadLine();
+});
+/* =========================================
+   EDITOR MUSIK V4.5 - BPM FIX FINAL
+========================================= */
+
+/* ===== BPM FINAL ===== */
+
+function changeBpm(amount) {
+    amount = Number(amount) || 0;
+
+    editorBpm += amount;
+
+    if (editorBpm < 40) editorBpm = 40;
+    if (editorBpm > 240) editorBpm = 240;
+
+    updateEditorBpmText();
+
+    if (typeof setTimelineBpm === "function") {
+        setTimelineBpm(editorBpm);
+    }
+
+    if (typeof changeMidiBpm === "function") {
+        /* MIDI tidak diubah otomatis agar tidak dobel +5 */
+    }
+
+    updateEditorInfo();
+}
+
+/* ===== SET BPM MANUAL ===== */
+
+function setEditorBpm(value) {
+    editorBpm = Number(value) || 120;
+
+    if (editorBpm < 40) editorBpm = 40;
+    if (editorBpm > 240) editorBpm = 240;
+
+    updateEditorBpmText();
+
+    if (typeof setTimelineBpm === "function") {
+        setTimelineBpm(editorBpm);
+    }
+}
+
+/* ===== UPDATE BPM TEXT FINAL ===== */
+
+function updateEditorBpmText() {
+    const bpmText = document.getElementById("bpmText");
+
+    if (bpmText) {
+        bpmText.innerHTML = editorBpm + " BPM";
+    }
+}
+
+/* ===== INIT BPM FINAL ===== */
+
+document.addEventListener("DOMContentLoaded", function () {
+    updateEditorBpmText();
+});
