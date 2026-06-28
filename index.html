@@ -464,45 +464,104 @@ Belum ada rekaman.
 </section>
 
 <section class="panel export-panel" id="exportPanel">
+
   <div class="panel-head">
     <div>
-      <h2>📤 Export V4</h2>
-      <p>Export dari Timeline Record / List Rekam Timeline</p>
+      <h2>📤 Export V4.5</h2>
+      <p>Export WAV / MP3 dari Timeline Record Editor Musik</p>
     </div>
+
     <button class="close-btn" onclick="closePanel('exportPanel')">×</button>
   </div>
 
-  <div class="export-v4-box">
-    <div class="export-v4-head">
+  <div class="export-box">
+    <div class="export-head">
       <div>
         <h3>📋 Timeline Record</h3>
-        <p>Pilih hasil susunan dari Editor Musik</p>
+        <p>Pilih hasil susunan lagu dari Editor Musik</p>
       </div>
+
       <button onclick="refreshExportTimelineRecordsV4()">🔄 Refresh</button>
     </div>
+
     <div class="export-timeline-list" id="exportTimelineListV4">
       <span class="empty-record">Belum ada Timeline Record</span>
     </div>
   </div>
 
-  <div class="export-v4-box">
-    <h3>📤 Export Timeline Record</h3>
-    <p class="export-v4-info" id="exportSelectedInfoV4">Belum memilih Timeline Record</p>
-    <div class="export-actions-v4">
-      <button onclick="exportSelectedTimelineRecordWavV4()">📤 Export WAV</button>
-      <button onclick="exportSelectedTimelineRecordMp3V4()">📤 Export MP3</button>
+  <div class="export-box">
+    <h3>🎵 Data Export</h3>
+
+    <div id="exportSelectedInfoV4" class="export-info">
+      Belum memilih Timeline Record
     </div>
-    <div class="export-status-v4" id="exportStatusV4">Status: menunggu pilihan</div>
+
+    <div class="export-format-box">
+      <button id="exportWavBtn" onclick="exportSelectedTimelineRecordWavV4()">
+        📤 Export WAV
+      </button>
+
+      <button id="exportMp3Btn" onclick="exportSelectedTimelineRecordMp3V4()">
+        📤 Export MP3
+      </button>
+    </div>
+
+    <div id="exportStatusV4" class="export-status">
+      Status: menunggu pilihan
+    </div>
   </div>
 
-  <div class="export-v4-box">
+  <div class="export-box">
+    <h3>⚙️ Pengaturan Export</h3>
+
+    <div class="export-setting-row">
+      <label>Quality MP3</label>
+      <select id="exportMp3Quality">
+        <option value="128">128 kbps</option>
+        <option value="192" selected>192 kbps</option>
+        <option value="256">256 kbps</option>
+        <option value="320">320 kbps</option>
+      </select>
+    </div>
+
+    <div class="export-setting-row">
+      <label>Sample Rate</label>
+      <select id="exportSampleRate">
+        <option value="44100" selected>44.1 kHz</option>
+        <option value="48000">48 kHz</option>
+      </select>
+    </div>
+
+    <div class="export-setting-row">
+      <label>Normalize</label>
+      <button id="exportNormalizeBtn" onclick="toggleExportNormalize()">
+        Normalize ON
+      </button>
+    </div>
+  </div>
+
+  <div class="export-box">
     <h3>📁 Riwayat Export</h3>
+
     <div class="export-history-list" id="exportHistoryListV4">
       <span class="empty-record">Belum ada hasil export</span>
     </div>
   </div>
-</section>
+<div class="export-box">
+    
+  <h3>📊 Progress Export</h3>
 
+  <div class="export-progress-wrap">
+    <div id="exportProgressBarV45" class="export-progress-bar"></div>
+  </div>
+
+  <div id="exportProgressTextV45">0%</div>
+
+  <button onclick="cancelExportV45()">⛔ Batalkan Export</button>
+  <button onclick="showExportInfoV45()">ℹ Info Export</button>
+  <button onclick="clearExportHistoryV45()">🗑 Hapus Riwayat</button>
+</div>
+</section>
 
 <section class="panel vocal-panel" id="vocalPanel">
 
@@ -517,7 +576,7 @@ Belum ada rekaman.
   <div class="vocal-status-box">
     <div id="vocalStatus">🔴 Belum Mulai</div>
 
-    <div class="vocal-controls">
+      <div class="vocal-controls">
       <button id="vocalRecordToggleBtn" onclick="toggleVocalRecord()">🎤 Rekam OFF</button>
       <button id="vocalStopBtn" onclick="pauseVocalRecord()">⏹ Stop</button>
       <button onclick="playLastVocal()">▶ Play</button>
