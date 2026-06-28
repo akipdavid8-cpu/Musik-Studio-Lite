@@ -1,0 +1,124 @@
+/* =========================================
+   PROJECT.CSS V4.5
+========================================= */
+
+.project-actions-v45{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.project-actions-v45 button,
+.project-tools-v45 button,
+.project-v4-box button{
+  padding:12px;
+  border-radius:14px;
+  border:none;
+  background:#2b1b46;
+  color:#fff;
+  font-weight:900;
+  border:1px solid rgba(139,92,246,.8);
+}
+
+.project-v4-box{
+  background:#0f0a1c;
+  border:1px solid rgba(139,92,246,.5);
+  padding:12px;
+  border-radius:14px;
+  margin:12px 0;
+}
+
+.project-v4-box h3{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.project-list-v4{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:10px;
+  max-height:230px;
+  overflow-y:auto;
+}
+
+.project-item,
+.project-item-v4{
+  background:#24163c;
+  border:1px solid rgba(139,92,246,.8);
+  border-radius:14px;
+  padding:10px;
+}
+
+.project-item.active,
+.project-item-v4.active{
+  border-color:#4ade80;
+  box-shadow:0 0 14px rgba(74,222,128,.45);
+}
+
+.project-item small,
+.project-item-v4 small{
+  display:block;
+  margin-top:4px;
+  color:#c4b5fd;
+  font-size:12px;
+}
+
+.project-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:8px;
+}
+
+.project-buttons button{
+  flex:1;
+  min-width:72px;
+  border:none;
+  border-radius:10px;
+  padding:8px;
+  background:#2b1b46;
+  color:#fff;
+  font-weight:900;
+  border:1px solid rgba(139,92,246,.8);
+}
+
+.project-buttons button:last-child{
+  background:#3b1020;
+  border-color:#ef4444;
+}
+
+#projectStatusV45{
+  background:#120c20;
+  border:1px solid rgba(74,222,128,.35);
+  color:#4ade80;
+  border-radius:12px;
+  padding:10px;
+  font-size:13px;
+  font-weight:900;
+  margin:12px 0;
+}
+
+.project-tools-v45{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.project-tools-v45 input{
+  grid-column:1 / -1;
+  width:100%;
+}
+
+.project-tools-v45 button{
+  font-size:13px;
+}
+
+.project-tools-v45 button:nth-child(2){
+  border-color:#4ade80;
+}
+
+.project-tools-v45 button:last-child{
+  background:#3b1020;
+  border-color:#ef4444;
+}
