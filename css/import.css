@@ -1,0 +1,132 @@
+/* =========================================
+   IMPORT.CSS V4.5
+========================================= */
+
+.import-panel{
+  background:#130d22;
+}
+
+.import-status-box,
+.import-option-box{
+  background:#0f0a1c;
+  border:1px solid rgba(139,92,246,.55);
+  border-radius:16px;
+  padding:12px;
+  margin-bottom:14px;
+}
+
+.import-status-box button,
+.import-option-box button,
+.import-transport button{
+  border:none;
+  border-radius:12px;
+  padding:10px 12px;
+  background:#2b1b46;
+  color:#fff;
+  font-weight:900;
+  border:1px solid rgba(139,92,246,.8);
+}
+
+.import-status-box button{
+  width:100%;
+  padding:14px;
+  font-size:15px;
+}
+
+#importStatus{
+  margin-top:10px;
+  color:#f87171;
+  font-weight:900;
+  font-size:13px;
+}
+
+#importInfo{
+  margin-top:6px;
+  color:#c4b5fd;
+  font-size:13px;
+  font-weight:800;
+}
+
+.import-option-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.import-list,
+#importList{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-height:190px;
+  overflow-y:auto;
+}
+
+.import-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:#24163c;
+  border:1px solid rgba(139,92,246,.8);
+  border-radius:14px;
+  padding:10px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.import-item small{
+  display:block;
+  color:#c4b5fd;
+  font-weight:500;
+  margin-top:3px;
+}
+
+.import-delete{
+  border:none;
+  background:#3b1020;
+  color:white;
+  border:1px solid #ef4444;
+  border-radius:10px;
+  padding:8px 10px;
+  font-weight:900;
+}
+
+.import-audio-tools{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+
+.import-audio-tools button{
+  border:none;
+  border-radius:9px;
+  padding:7px 9px;
+  background:#2b1b46;
+  color:white;
+  border:1px solid rgba(139,92,246,.8);
+  font-size:12px;
+  font-weight:900;
+}
+
+.import-audio-tools button:last-child{
+  background:#3b1020;
+  border-color:#ef4444;
+}
+
+.import-transport{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:14px;
+}
+
+.import-transport button:last-child{
+  grid-column:1 / -1;
+  border-color:#4ade80;
+}
+
+#importInput{
+  display:none;
+}
