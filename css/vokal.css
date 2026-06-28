@@ -1,0 +1,77 @@
+
+/* =========================================
+   VOKAL.CSS V4.5
+========================================= */
+
+.vocal-panel{
+  background:#130d22;
+}
+
+.vocal-status-box,
+.vocal-effect-box{
+  background:#0f0a1c;
+  border:1px solid rgba(139,92,246,.55);
+  border-radius:16px;
+  padding:12px;
+  margin:12px 0;
+}
+
+#vocalStatus{
+  background:#120c20;
+  border:1px solid rgba(239,68,68,.45);
+  color:#f87171;
+  border-radius:12px;
+  padding:10px;
+  font-weight:900;
+  font-size:13px;
+  margin-bottom:10px;
+}
+
+.vocal-controls,
+.vocal-effect-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.vocal-controls button,
+.vocal-effect-box button{
+  border:none;
+  border-radius:12px;
+  padding:10px;
+  background:#2b1b46;
+  color:#fff;
+  font-weight:900;
+  border:1px solid rgba(139,92,246,.8);
+}
+
+#vocalRecordToggleBtn{
+  border-color:#4ade80;
+}
+
+#vocalStopBtn{
+  border-color:#ef4444;
+}
+
+#vocalList{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-height:180px;
+  overflow-y:auto;
+}
+
+.vocal-item{
+  background:#24163c;
+  border:1px solid rgba(139,92,246,.8);
+  border-radius:14px;
+  padding:10px;
+  font-weight:900;
+}
+
+.vocal-item small{
+  display:block;
+  color:#c4b5fd;
+  font-size:12px;
+  margin-top:4px;
+}
