@@ -1,1 +1,287 @@
+/* =========================================
+   MAIN.CSS V4.5
+   Global + Home + Panel Dasar
+========================================= */
 
+:root{
+  --bg:#0e0a1a;
+  --card:#1e1430;
+  --panel:#160f25;
+  --panel2:#120c20;
+  --purple:#8b5cf6;
+  --purple2:#c4b5fd;
+  --text:#ffffff;
+  --muted:#a78bfa;
+  --green:#4ade80;
+  --danger:#ef4444;
+  --yellow:#facc15;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+  font-family:'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+body.panel-open{
+  overflow:hidden;
+}
+
+.app{
+  max-width:480px;
+  margin:0 auto;
+  min-height:100vh;
+  padding:32px 24px;
+}
+
+header{
+  text-align:center;
+  margin-bottom:36px;
+}
+
+header h1{
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+/* ===== HOME GRID ===== */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.tile{
+  aspect-ratio:.85/1;
+  background:var(--card);
+  border:2px solid var(--purple);
+  border-radius:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  transition:.12s;
+}
+
+.tile:active{
+  transform:scale(.95);
+}
+
+.tile:hover{
+  box-shadow:0 0 16px rgba(139,92,246,.5);
+}
+
+.tile .icon{
+  font-size:42px;
+  line-height:1;
+}
+
+.tile .label{
+  font-size:16px;
+  font-weight:700;
+  text-align:center;
+}
+
+/* ===== PANEL BACKDROP ===== */
+
+.panel-backdrop{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:99998;
+}
+
+.panel-backdrop.show{
+  display:block;
+}
+
+/* ===== PANEL DASAR ===== */
+
+.panel{
+  display:none;
+  background:var(--panel);
+  border:2px solid var(--purple);
+  border-radius:22px;
+  padding:16px;
+  box-shadow:0 0 40px rgba(139,92,246,.55);
+}
+
+.panel.show{
+  display:block;
+  position:fixed;
+  top:70px;
+  left:10px;
+  right:10px;
+  bottom:12px;
+  overflow:auto;
+  z-index:99999;
+}
+
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:16px;
+  position:sticky;
+  top:0;
+  background:var(--panel);
+  z-index:100000;
+  padding-bottom:10px;
+}
+
+.panel-head h2{
+  font-size:22px;
+}
+
+.panel-head p{
+  margin-top:4px;
+  font-size:13px;
+  color:var(--purple2);
+}
+
+.close-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:var(--danger);
+  color:#fff;
+  font-size:30px;
+  line-height:1;
+  cursor:pointer;
+}
+
+/* ===== BUTTON UMUM ===== */
+
+button{
+  cursor:pointer;
+}
+
+button:active{
+  transform:scale(.96);
+}
+
+.clear-btn,
+.timeline-controls button,
+.editor-transport button,
+.editor-tool-tabs button,
+.add-track-box button,
+.project-actions-v45 button{
+  border:none;
+  border-radius:12px;
+  padding:10px 12px;
+  background:#2b1b46;
+  color:#fff;
+  font-weight:900;
+  border:1px solid rgba(139,92,246,.8);
+}
+
+/* ===== PAD DASAR ===== */
+
+.pad-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.pad{
+  min-height:70px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(145deg,#2b1b46,#1c1230);
+  border:1px solid rgba(139,92,246,.8);
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.pad:active,
+.pad.hit{
+  transform:scale(.94);
+  border-color:var(--green);
+  box-shadow:0 0 18px rgba(74,222,128,.55);
+}
+
+/* ===== RECORD PANEL UMUM ===== */
+
+.record-panel{
+  margin-top:24px;
+  background:var(--panel2);
+  border:2px solid rgba(139,92,246,.7);
+  border-radius:22px;
+  padding:16px;
+}
+
+.record-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.record-head h2{
+  font-size:20px;
+}
+
+.record-head p{
+  margin-top:4px;
+  font-size:13px;
+  color:var(--purple2);
+}
+
+.empty-record{
+  color:var(--muted);
+  font-size:14px;
+  padding:8px 0;
+}
+
+/* ===== FORM UMUM ===== */
+
+input,
+select,
+textarea{
+  background:#0e0a1a;
+  color:#fff;
+  border:1px solid rgba(139,92,246,.65);
+  border-radius:12px;
+  padding:10px;
+  outline:none;
+}
+
+textarea{
+  width:100%;
+  min-height:120px;
+  resize:vertical;
+}
+
+/* ===== SCROLLBAR ===== */
+
+::-webkit-scrollbar{
+  width:8px;
+  height:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:#0e0a1a;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#8b5cf6;
+  border-radius:999px;
+}
